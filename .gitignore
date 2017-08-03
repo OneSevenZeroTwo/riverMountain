@@ -1,5 +1,4 @@
 ﻿node_modules
-src/doc
 #过滤压缩包
 *.gz
 *.zip
