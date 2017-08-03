@@ -1,0 +1,87 @@
+<div id="content">
+	<div class="panel">
+		<div class="header topic_header">
+			<span ng-bind="detailData.title" class="topic_full_title">        
+      </span>
+			<div class="changes">
+				<span>
+          发布于{{detailData.create_at|limitTo:10:0}}
+        </span>
+				<span>
+          作者 <a href="/user/i5ting" ng-bind-html="detailData.author.loginname|html"></a>
+        </span>
+				<span>
+       {{detailData.visit_count}}次浏览
+        </span>
+
+				<span> 来自 {{detailData.tab}}</span>
+
+			</div>
+
+		</div>
+		<div class="inner topic">
+
+			<div class="topic_content">
+				<div class="markdown-text" ng-bind-html="detailData.content|html">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="header">
+			<span class="col_fade">{{detailData.reply_count}} 回复</span>
+		</div>
+		<div ng-repeat="items in detailData.replies track by $index" class="cell reply_area reply_item
+  " reply_id="{{items.id}}" reply_to_id="" id="{{items.id}}">
+			<div class="author_content">
+				<a ng-href="{{'#!/user/'+items.author.loginname}}" class="user_avatar">
+					<img ng-src="{{items.author.avatar_url}}" title="Rwing"></a>
+
+				<div class="user_info">
+					<a ng-bind-html="items.author.loginname|html" class="dark reply_author" href="{{'#!/user/'+items.author.loginname}}"></a>
+					<a class="reply_time" href="#59632b6610d696af07768b40">{{$index+1}}楼•{{items.create_at|lastReplyTime}}</a>
+				</div>
+				<div class="user_action">
+					<span>
+        <i class="fa up_btn
+          fa-thumbs-o-up
+          invisible" title="喜欢"></i>
+        <span class="up-count">
+          
+        </span>
+					</span>
+
+					<span>
+        
+      </span>
+				</div>
+			</div>
+			<div class="reply_content from-Rwing">
+				<div ng-bind-html="items.content|html" class="markdown-text">
+
+				</div>
+			</div>
+			<div class="clearfix">
+				<div class="reply2_area">
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<style>
+	#content {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	.iconfont {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+	}
+</style>

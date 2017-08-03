@@ -1,0 +1,65 @@
+<header ng-controller='allCtrl'>
+	<div class="navbar">
+		<a class="brand" href="">
+			<img ng-src="{{headerImg}}">
+		</a>
+	</div>
+	<div ng-click="back()" class="historyBack">		
+		<i class="iconfont icon-arrowleft aaaa"></i>
+	</div>
+	<div ng-click="sideIn()" class="mine">
+		<span class="iconfont icon-account"></span>
+	</div>
+</header>
+<style>
+	header {
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 58px;
+		width: 100%;
+		background: #444;
+		text-align: center;
+		line-height: 50px;
+		font-size: 20px;
+		z-index: 10;
+	}
+	.navbar .brand {
+    padding: 0px 125px;
+	}
+	.navbar .brand img{
+		display: block;
+		margin-top: 9px;
+		
+	}
+	.historyBack{
+		position: absolute;
+		left: 12px;
+		top: 10px;
+		z-index: 1000;
+		width: 35px;
+		height: 35px;
+	}
+	i.aaaa {
+		position: absolute;
+		left: 0;
+		top: 10px;
+		font-size: 24px;
+	}
+	.historyBack:active .aaaa{
+		font-size: 28px;
+	}
+	.mine{
+		position: absolute;
+		z-index: 1000;
+		width: 35px;
+		height: 35px;
+		right: 16px;
+		top: 6px;
+	}
+	.navbar{
+		background: #444;
+	}
+	
+	
+</style>

@@ -1,0 +1,41 @@
+<div class="panel">
+	<div class="header">
+		<ul class="breadcrumb">
+	
+			<li>
+				<a >注册</a>
+			</li>
+		</ul>
+	</div>
+	<div class="inner xxxxx">
+
+		<form id="signin_form" class="form-horizontal" action="/auth/github/create" method="post">
+
+			<div class="control-group">
+				<label class="control-label" for="name">用户名</label>
+
+				<div class="controls">
+					<input class="input-xlarge" id="name" name="name" size="30" type="text">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="pass">密码</label>
+
+				<div class="controls">
+					<input class="input-xlarge" id="pass" name="pass" size="30" type="password">
+				</div>
+			</div>
+			<input type="hidden" name="_csrf" value="WalPz1G5-6sLFPzXwXra2SiAH5S6-qR_YCp4">
+
+			<div class="form-actions">
+				<input type="submit" class="span-primary" value="注册新账号">
+			</div>
+		</form>
+	</div>
+</div>
+
+<style>
+	.panel {
+		margin-top: 55px;
+	}
+</style>

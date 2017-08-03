@@ -1,0 +1,122 @@
+<div id="sideBar" ng-class="{'sideBarIn':sidebarstate,'sideBarOut':sidebarstateOut}">
+	<div ng-class="{'zhezhao':sidebarstate}" ng-click="mineLeave()"></div>
+	<ul>
+		<li class="one">
+			<a href="">				
+				<!--<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="" />-->
+			</a>
+		</li>
+		<li>
+			<a href="#!/index/topics">首页</a>
+		</li>
+		<li>
+			<a href="#!/getstart">新手入门</a>
+		</li>
+		<li>
+			<a href="#!/about">关于</a>
+		</li>
+		<li>
+			<a href="#!/login">登录</a>
+		</li>
+		<li>
+			<a href="#!/register">注册</a>
+		</li>
+		<li>
+			<a href="#!/mine">myCnode</a>
+		</li>
+	</ul>
+</div>
+
+<style>
+	#sideBar {
+		position: fixed;
+		left: -250px;
+		top: 0px;
+		width: 250px;
+		height: 100%;
+		z-index: 1000;
+	}
+	
+	#sideBar ul {
+		position: relative;
+		width: 100%;
+		height:100%;
+		float: left;
+		background: #fff;
+		text-align: center;
+		list-style: none;
+		background-size:100%;
+		background: #444;
+		opacity: 0.8;
+		margin: 0;
+		z-index: 3000;		
+	}
+	
+	#sideBar ul li {
+		border-top: 1px solid #F7F7F7;
+		border-bottom: 2px solid #D4D4D4;
+		
+	}
+	
+	#sideBar ul li a {
+		display: block;
+		padding: 8px 0;
+		font-size: 14px;
+		border-right: 8px solid #F7F7F7;
+		color: #fff;
+		font-weight: bold;
+		transition: 1s;
+	}
+	
+	#sideBar a:active {
+		color: #fff;
+		background: #444;
+		border-right: 8px solid rgb(141, 140, 140);
+		transition: 0s;
+	}
+
+	#sideBar .one a{
+		border-right: 0;
+		height: 65px;
+	}
+	
+	.sideBarIn{
+		animation:sideIn 0.3s  ease-out forwards;
+		
+	}
+	.sideBarOut{
+		animation:sideOut 0.3s  ease-out forwards;
+		
+	}
+	@keyframes sideIn{
+		0%{
+			left:-250px;
+		}
+		100%{
+			left: 0;
+		}
+	}
+	@keyframes sideOut{
+		0%{
+			left:0px;
+		}
+		100%{
+			left: -250px;
+		}
+	}
+	
+	.zhezhao{
+		position: absolute;
+		left: -100px;
+		top: -100px;
+		width: 1000%;
+		height: 1000%;
+		display: block;
+		z-index: 2000;
+	}
+
+	#sideBar .one a{
+		padding: 14px 0;
+		background:#444;		
+	}
+</style>

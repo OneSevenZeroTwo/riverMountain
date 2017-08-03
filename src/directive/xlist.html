@@ -1,0 +1,93 @@
+<div class="weui-panel__bd">
+	<a ng-repeat="items in arr |filter:{title:searchValue}" href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd" >
+			<img ng-click="user(items.author.loginname)" class="weui-media-box__thumb" ng-src="{{items.author.avatar_url}}" alt="">
+		</div>
+		<div class="channel" ng-bind-html="items.tab|channel:items.good:items.top|html">			
+		</div>
+		
+		
+		<div ng-click="user(items.author.loginname)" ng-bind-html="items.author.loginname|html" class='autorName'>
+			
+		</div>
+		<div ng-click="toDetail(items.id)" class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">{{items.title|ellipsis}}</h4>
+			<p class="weui-media-box__desc repCount">
+				<span>查看/回复： </span>
+				<span title="回复数">{{items.reply_count}}</span>
+				<span title="点击数">{{"/"+items.visit_count}}</span>
+				<span class="lastTime" title="最后回复时间">最后回复:{{items.last_reply_at|lastReplyTime}}</span>
+			</p>
+		</div>
+	</a>
+	<div ng-show="isLoading" ng-click="loadMore()" class="weui-panel__ft">
+		<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+			<div class="weui-cell__bd">查看更多</div>
+			<span class="weui-cell__ft"></span>
+		</a>
+	</div>
+	<div ng-show="!isLoading" class="weui-loadmore">
+		<i class="weui-loading"></i>
+		<span class="weui-loadmore__tips">正在加载</span>
+	</div>
+	
+</div>
+
+<style>
+	.weui-panel__bd {
+		margin-bottom: 62px;
+		background: #FFF;
+	}
+	.weui-media-box_appmsg .weui-media-box__hd{
+		
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		border-radius: 50%;
+		position: absolute;
+		left: 11px;
+		top:12px;
+	}
+	.autorName{
+		position: absolute;
+		left: 48px;
+		top:11px;
+		color:#877a7a;
+	}
+	.weui-media-box__bd{
+		padding-left:33px;
+		padding-top: 15px;
+		
+	}
+	.channel{
+		position: absolute;
+		width: 200px;
+		right: 0;
+		top: 12px;
+		overflow: hidden;
+		padding-right: 10px;
+	}
+
+	.bg{
+		float: right;
+		margin-left: 5px;
+		width: 34px;
+		height: 18px;
+		line-height: 18px;
+		text-align: center; 
+		background: #ccc;
+		border-radius: 5px;
+		font-size: 12px;
+		color:#554b4b;
+		background: #ccc;
+	}
+	.repCount{
+		color:#999;
+		font-size: 12px;
+		overflow: hidden;
+	}
+	.lastTime{
+		float: right;
+		margin-right: 40px;
+	}
+</style>

@@ -1,0 +1,56 @@
+<div class="page__bd">
+	<!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+	<div ng-class="{'weui-search-bar_focusing':isFocusing}"  class="weui-search-bar " id="searchBar">
+		<form class="weui-search-bar__form">
+			<div class="weui-search-bar__box">
+				<i class="weui-icon-search"></i>
+				<input ng-model="searchValue"  type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+				<a ng-click="searchClear()" href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+			</div>
+			<label ng-click="isSearching()" class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+		</form>
+		<a href="javascript:" ng-click="isFocusing=false" class="weui-search-bar__cancel-btn" id="searchCancel" style="color:#09BB07">取消</a>
+	</div>
+	<div class="weui-cells searchbar-result" id="searchResult" style="display: none;">
+		<div class="weui-cell weui-cell_access">
+			<div class="weui-cell__bd weui-cell_primary">
+				<p>实时搜索文本</p>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_access">
+			<div class="weui-cell__bd weui-cell_primary">
+				<p>实时搜索文本</p>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_access">
+			<div class="weui-cell__bd weui-cell_primary">
+				<p>实时搜索文本</p>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_access">
+			<div class="weui-cell__bd weui-cell_primary">
+				<p>实时搜索文本</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.page__bd{
+		margin-top:58px;
+	}
+
+	#searchInput{
+		margin-bottom: 0;
+		box-shadow: none;
+	}
+	#searchText{
+		margin-bottom: 0;
+	}
+	.weui-search-bar__cancel-btn{
+		color:#b8aeae;
+	}
+</style>

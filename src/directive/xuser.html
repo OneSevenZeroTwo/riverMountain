@@ -1,0 +1,141 @@
+<div id="main">
+	
+
+	<div id="content">
+		<div class="panel">
+			<div class="header">
+				<ul class="breadcrumb">
+					<li>
+						<a href="/">用户</a><span class="divider">/</span></li>
+				</ul>
+			</div>
+			<div class="inner userinfo">
+				<div class="user_big_avatar">
+						<img ng-src="{{arr.avatar_url}}" class="user_avatar">
+						
+				</div>
+				<a class="dark" ng-bind-html="arr.loginname|html"></a>
+
+				<div class="user_profile">
+					<ul class="unstyled">
+						<span class="big" ng-bind="arr.score"></span> 积分
+
+						<li>
+							<a class="dark" href="/user/i5ting/collections" target="_blank">
+								<span class="big collect-topic-count">18</span>个话题收藏
+							</a>
+						</li>
+
+						<li>
+							<i class="iconfont icon-biaoqian bbb"></i>
+							<a class="dark" href="http://i5ting.com" target="_blank">http://i5ting.com</a>
+						</li>
+
+						<li>
+							<i class="iconfont icon-wxbdingwei bbb"></i>
+							<span class="dark">北京</span>
+						</li>
+
+						<li>
+							<i class="iconfont bbb">git</i>
+							<a ng-bind_html="arr.githubUsername|html" class="dark" href="https://github.com/i5ting" target="_blank">
+
+							</a>
+						</li>
+
+						<li>
+							<i class="iconfont bbb">微博</i>
+							<a class="dark" href="shit微博" target="_blank">shit微博</a>
+						</li>
+
+					</ul>
+				</div>
+				<p class="col_fade" ng-bind="arr.create_at |lastReplyTime"></p>
+
+			</div>
+		</div>
+
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">最近创建的话题</span>
+			</div>
+			<div class="cell" ng-repeat="items in arr.recent_topics |limitTo:num:0">
+
+				<a class="user_avatar pull-left" ng-href="{{'#!/detail/'+items.id}}">
+					<img ng-src="{{arr.avatar_url}}">
+				</a>
+
+				<span class="reply_count pull-left">
+			   
+			
+				
+			    
+				</span>
+
+				<a class="last_time pull-right">
+					<img class="user_small_avatar" src="https://avatars1.githubusercontent.com/u/227713?v=3&amp;s=120">
+					<span ng-bind="items.last_reply_at|lastReplyTime" class="last_active_time">2 小时前</span>
+				</a>
+
+				<div class="topic_title_wrapper">
+
+					<a ng-bind-html="items.title|html" class="topic_title" ng-href="{{'#!/detail/'+items.id}}" title="调查一下，使用egg.js的有多少？">
+
+					</a>
+				</div>
+			</div>
+			<div class="cell more">
+				<a class="dark" ng-click="num=15">查看更多»</a>
+			</div>
+		</div>
+
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">最近参与的话题</span>
+			</div>
+
+			<div class="cell" ng-repeat="items in arr.recent_replies">
+
+				<a class="user_avatar pull-left" ng-href="{{'#!/user/'+items.author.loginname}}">
+					<img ng-src="{{items.author.avatar_url}}" >
+				</a>
+
+				<span class="reply_count pull-left">
+			   
+
+				
+				</span>
+
+				<a class="last_time pull-right">
+					<img class="user_small_avatar" src="https://avatars1.githubusercontent.com/u/14976489?v=3&amp;s=120">
+					<span class="last_active_time" ng-bind="items.last_reply_at|lastReplyTime"></span>
+				</a>
+
+				<div class="topic_title_wrapper">
+
+					<a ng-bind-html="items.title|html" class="topic_title" ng-href="{{'#!/detail/'+items.id}}" title="一步一步教大家制作node的rust扩展">
+						
+					</a>
+				</div>
+			</div>
+			
+
+			<div class="cell more">
+				<a class="dark">查看更多»</a>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<style>
+	#content {
+		margin-top: 63px;
+	}
+	.bbb{
+		color: #000;
+		opacity: .4;
+		font-size: 14px;
+	}
+</style>

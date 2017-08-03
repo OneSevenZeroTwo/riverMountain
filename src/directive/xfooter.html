@@ -1,0 +1,55 @@
+<div class="weui-tabbar">
+	<a ng-repeat="items in nav" idx="$index"  ng-class="{'activing':$index==activingNav}" ng-href="{{items.href}}" class="weui-tabbar__item weui-bar__item_on">
+		<p class="weui-tabbar__label">
+			<i class="iconfont {{items.ionClass}} iii"></i>
+			<i class="channelname">{{items.tabName}}</i>
+		</p>
+	</a>
+</div>
+
+
+<style>
+	.weui-tabbar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background: rgb(252, 252, 252);
+		height: 58px;
+	}
+	.weui-tabbar__label{
+		height: 100%;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		justify-content: center;
+	}
+	.weui-tabbar .iii{
+		color:#4e4a4a;
+		width: 100%;
+		
+	}
+	.channelname{
+		font-style: normal;
+		margin-top: 3px;
+		color:#4e4a4a;
+	}
+
+	.weui-tabbar__label:focus .channelname{
+		text-decoration: none;
+		color:red
+	}
+	.activing{
+		background: #f7f7f9;
+		
+	}
+	.activing i{
+		color:#80bd01;
+	}
+	.activing .iii{
+		color:#80bd01;
+	}
+	.weui-tabbar__item{
+		padding-top:12px;
+	}
+</style>
