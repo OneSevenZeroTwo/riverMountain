@@ -24,7 +24,7 @@
 			url: "/address",
 			templateUrl:'./template/address.html'
 		})
-		$urlRouterProvider.when('','/index/topics')
+		$urlRouterProvider.when('','/index')
 		
 		
 	}])

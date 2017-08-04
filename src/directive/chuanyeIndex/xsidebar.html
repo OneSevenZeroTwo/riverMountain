@@ -1,0 +1,74 @@
+<div  ng-click="directionTo('left')">
+	<div ng-transclude class="nav-content" ng-class="{'sidebar-move-left':direction=='left','sidebar-move-right':direction=='right'}">
+			<button class="left-button" ng-click="directionTo('left')">left</button>
+
+	</div>
+</div>
+
+<style>
+	/*全局样式*/
+	
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	.left-button {
+		float: right;
+	}
+	/*组件的样式*/
+	/*向左滑动的动画*/
+	
+	@keyframes moveLeft {
+		from {
+			transform: translateX(260px);
+		}
+		to {
+			
+		}
+	}
+	
+	.sidebar-move-left {
+		animation: moveLeft;
+		/*持续时间*/
+		animation-duration: 1s;
+		/*动画播放次数*/
+		animation-iteration-count: 1;
+		/*执行方向，动画执行结束时保持在它结束时的状态*/
+		animation-fill-mode: forwards;
+	}
+	/*向右边滑动的动画*/
+	
+	@keyframes moveRight {
+		from {
+			
+		}
+		to {
+			transform: translateX(260px);
+		}
+	}
+	
+	.sidebar-move-right {
+		animation: moveRight;
+		/*持续时间*/
+		animation-duration: 1s;
+		/*动画播放次数*/
+		animation-iteration-count: 1;
+		/*执行方向，动画执行结束时保持在它结束时的状态*/
+		animation-fill-mode: forwards;
+	}
+	
+	.nav-content {
+		width: 260px;
+		position: fixed;
+		min-height: 100%;
+		top:0;
+		left: -260px;
+		background-color: #e1e1e1;
+		/*调试代码时经常使用border，帮我们定位到div的一个区域*/
+		/*border: 1px solid black;*/
+		z-index: 10000;
+		/*使用透明度为0来隐藏元素*/
+		opacity: 1;
+	}
+</style>
