@@ -7,45 +7,21 @@
 <section class="desc">
 	<table>
 		<tbody>
-			<tr>
-				<th>商品品牌:</th>
-				<td>丽得姿</td>
-			</tr>
-			<tr>
-				<th>商品名称:</th>
-				<td>领先润美强化补水修复面膜 10片</td>
-			</tr>
-			<tr>
-				<th>备注:</th>
-				<td>包装：有外盒无塑封</td>
-			</tr>
-			<tr>
-				<th>有效期:</th>
-				<td>2019年（具体以实物为准）</td>
-			</tr>
-			<tr>
-				<th>规格:</th>
-				<td>10片</td>
-			</tr>
-			<tr>
-				<th>特点描述:</th>
-				<td>深层补水,保湿透亮</td>
-			</tr>
-			<tr>
-				<th>产地:</th>
-				<td>北京</td>
-			</tr>
-			<tr>
-				<th>货号:</th>
-				<td>6934110000022</td>
+			<tr ng-repeat="msgs in msg.goods.descriptions">
+				<th>{{msgs.name}}</th>
+				<td>{{msgs.value}}</td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="image-detail"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/184/ef0dff1c-7346-4e2e-bf48-35f68d3eeb68.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/123/24eb3813-8da9-4ccb-94d7-6d9f22b61fdc.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/153/18b7616c-8a1c-4b12-94df-398fd5f0733f.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/62/c96fdb71-9d20-44dc-928f-7d214f5b9322.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/84/1152c5ab-a137-4a36-994a-8755fc226c27.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/184/5f8180bb-8176-4b48-9822-bf3d42a54c61.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/94/b5674951-aced-4e58-aa3e-bda48fb2819c.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/10/611f4e8b-ed53-4016-b255-c5421ab085ee.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/16/b48867cc-c153-4df0-9c8d-c1ecd0bc87aa.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/76/644f8990-e1a5-4816-b01c-da57f8116b4f.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/102/82e5b91a-0d73-4e48-af6c-eb3df879520d.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/107/df893ae0-5d0d-40c2-9dcf-a94a361bc809.jpg"><img src="http://a.vpimg2.com/upload/merchandise/pdcvis/2017/05/25/151/95400e82-1dae-439b-a9b0-a2f0db9d2eec.jpg"></div>
+	<div class="click-to-detail ui-decoration-hyperlink">点击查看图文详情</div>
+
+	<div class="image-detail" style="display: none;">
+		<img ng-repeat="imgs in msg.goods.detailImage" src="{{imgs}}">
+	</div>
 </section>
 
 <!--购物说明-->
-<ul class="note">
+<ul class="note" style="display: none;">
 	<li>
 		<h2>关于商品</h2>
 		<p>乐蜂网上所售卖的商品均经过品牌授权，确保正品，并由中国太平洋财产保险股份有限公司为您购买的每一件商品进行承保。</p>
