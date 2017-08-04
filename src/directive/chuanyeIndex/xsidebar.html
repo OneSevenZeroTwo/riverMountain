@@ -1,7 +1,38 @@
-<div  ng-click="directionTo('left')">
-	<div ng-transclude class="nav-content" ng-class="{'sidebar-move-left':direction=='left','sidebar-move-right':direction=='right'}">
-			<button class="left-button" ng-click="directionTo('left')">left</button>
+<div >
+	<div ng-transclude class="nav-content" ng-class="{'sidebar-move-right':sideout,'sidebar-move-left':sidein}">
+			<button class="left-button" ng-click="changehide()">left</button> 
+		    <div id="shou" style="z-index: 4;background: #fff;height: 100%;">
+        <div class="_1G5Zvrg1d7lN88qvhh6YPP">
+            <div class="_1UBMqD_RSfWYicIiSlv77n _38_Z28Q4LpfXqInYVZPJZI">
+                <header class="clearfix">
+                    <div class="content node">
+                        <form class="_1UyOYKRtptKK0v1qcKLhQS">
+                            <div class="_3q4mrjJOs4yXQXAAlhODfw">
+                                <input type="text" name="keyword" placeholder="搜索商品" maxlength="15" class="keyword"><i class="icon-cancel ui-decoration-hyperlink"></i></div>
+                            <div class="goback ui-decoration-hyperlink qu" >取消</div>
+                            <div class="goback ui-decoration-hyperlink shou" style="display: none;">搜索</div>
+                        </form>
+                    </div><span class="right-btn ui-decoration-hyperlink " ng-click="changehide()"><i class="img-icon home"></i></span></header>
+            </div>
+            <dl class="_2zSykbfnp9HX1QFp7QarD5">
+                <dt><i class="img-icon search-hot"></i>
+                    <!-- react-text: 3086 -->大家都在搜
+                    <!-- /react-text -->
+                </dt>
+                <dd class="ui-decoration-hyperlink highlight" ng-repeat="n in news  track by $index">{{n}}</dd>
 
+            </dl>
+            <dl class="_2zSykbfnp9HX1QFp7QarD5">
+                <dt><i class="img-icon search-history"></i>
+                    历史搜索
+                  <i class="img-icon search-clear ui-decoration-hyperlink"></i></dt>
+                <!-- <dd class="ui-decoration-hyperlink">面膜</dd> -->
+                <i class="history" style=" font-style:normal"></i>
+
+            </dl>
+            <!-- react-empty: 3102 -->
+        </div>
+    </div>
 	</div>
 </div>
 
@@ -21,7 +52,7 @@
 	
 	@keyframes moveLeft {
 		from {
-			transform: translateX(260px);
+			transform: translateX(-320px);
 		}
 		to {
 			
@@ -44,7 +75,7 @@
 			
 		}
 		to {
-			transform: translateX(260px);
+			transform: translateX(-320px);
 		}
 	}
 	
@@ -59,12 +90,12 @@
 	}
 	
 	.nav-content {
-		width: 260px;
+		width: 320px;
 		position: fixed;
 		min-height: 100%;
 		top:0;
-		left: -260px;
-		background-color: #e1e1e1;
+		left: 320px;
+		background-color: #fff;
 		/*调试代码时经常使用border，帮我们定位到div的一个区域*/
 		/*border: 1px solid black;*/
 		z-index: 10000;

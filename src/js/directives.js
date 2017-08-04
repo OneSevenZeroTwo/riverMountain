@@ -7,7 +7,7 @@
 			templateUrl: "directive/xheader.html",
 			link: function(scope, ele, attr) {
 				//				头部的图片
-				console.log("header加载")
+
 				scope.headerImg = "./images/nodejs.png"
 
 				//返回上一个页面
@@ -29,9 +29,13 @@
 	//chuan.................................................................index
 
 	//	头部
-	directives.directive('xindexheader', [function() {
+	directives.directive('xindexheader', ['$rootScope', function($rootScope) {
 		return {
-			templateUrl: "directive/chuanyeIndex/xheader.html"
+			templateUrl: "directive/chuanyeIndex/xheader.html",
+			link: function(scope, ele, attr) {
+				console.log("header")
+
+			}
 		}
 	}])
 
@@ -69,11 +73,46 @@
 		}
 	}])
 	// 首页的列表页
-	directives.directive('xindexlist', [function() {
+	directives.directive('xindexlist', ['$state', '$http', '$window', function($state, $http, $window) {
 		return {
 			templateUrl: "directive/chuanyeIndex/xlist.html",
 			link: function(scope, ele, attr) {
+				//				首页列表页请求
+				scope.arr = [];
+				scope.page = 1;
+				scope.isLoadMore = 0;
 
+				scope.shows = function() {
+
+					$http({
+						methods: 'get',
+						url: 'http://w.lefeng.com/api/neptune/special_brands/v3?page=' + scope.page + '&labelType=1'
+					}).then(function(data) {
+						console.log(data.data)
+						scope.aaa = data.data.data
+						scope.arr = scope.arr.concat(scope.aaa)
+						console.log(scope.arr)
+
+						scope.isLoadMore++;
+
+					})
+				}
+				scope.shows()
+				scope.isLoadMore--;
+				
+				$(window).scroll(function() {
+					if($(window).scrollTop() >= scope.page * 3000) {
+						scope.page++
+							console.log(scope.page)
+						scope.shows()
+						scope.isLoadMore--;
+
+					}
+				})
+
+				scope.goToDetail = function(id) {
+					$window.location.href = "#!/list/" + id
+				}
 			}
 		}
 	}])
@@ -91,33 +130,69 @@
 		return {
 			templateUrl: "directive/chuanyeIndex/xtop.html",
 			link: function(scope, ele, attr) {
+				//返回顶部
+				$(document).scroll(function() {
+					//					console.log(222)
+					if($(document).scrollTop() > 100) {
+						//				console.log(23322)
+						$('.icon4').fadeIn();
 
+					} else {
+						$('.icon4').fadeOut()
+
+					}
+
+				});
+				//按钮top
+				$('.icon4').on('click', function() {
+					console.log('11111')
+					$('body,html').stop(true).animate({
+						scrollTop: 0
+					}, 500)
+				})
 			}
 		}
 	}])
 	// 侧边栏
-	//	directives.controller("indexCtrl", function($scope) {
-	//		$scope.directionTo = function(direction) {
-	//			console.log(1111111)
-	//			$scope.$emit("sidebar-move-left", direction)
-	//		}
-	//	})
-	directives.directive('xindexsidebar', ['$rootScope', '$window', function($rootScope, $window) {
+	directives.directive('xindexsidebar', ['$state', '$http', '$rootScope', '$window', function($state, $http, $rootScope, $window) {
 		return {
 			templateUrl: 'directive/chuanyeIndex/xsidebar.html',
-			scope: {},
+			//日！！！日
+			//			scope: {},
 			transclude: true,
 			link: function(scope, ele, attr) {
-				$rootScope.directionTo = function(direction) {
-					$rootScope.direction = direction
-					console.log($rootScope.direction)
-					scope.$emit("sidebar-move-left", direction)
+				//				很奇怪的侧边栏
+				console.log('sidebar')
+				scope.sideout = false
+				scope.sidein = false
+				scope.changeshow = function() {
+					console.log("侧边栏出来")
+					scope.sideout = true
+					scope.sidein = false
 				}
-				$rootScope.$on("sidebar-move-left", function(err, data) {
-					console.log(data)
-					scope.direction = data
-				})
+				scope.changehide = function() {
+					console.log("侧边栏回去")
+					scope.sideout = false
+					scope.sidein = true
+				}
+				//	侧边栏热门搜索
+				$http({
+					methods: 'get',
+					url: 'http://w.lefeng.com/api/neptune/search/hot_keywords/v1?count=10'
+				}).then(function(data) {
+					console.log(data.data.data)
+					scope.news = data.data.data
 
+				})
+			}
+		}
+	}])
+	//	loading
+	directives.directive('xindexzhe', [function() {
+		return {
+			templateUrl: 'directive/chuanyeIndex/xzhe.html',
+			link: function(scope, ele, attr) {
+				scope.zhe = true
 			}
 		}
 	}])
