@@ -1,0 +1,38 @@
+<section>
+	<div class="list-wrap">
+		<h2>乐蜂</h2>
+		<ul>
+			<li class="_2x2q-D1HfUB-t0Mz-xT6p2 _3IoPLx6GQQOl20LvlxPg-Z">
+				<ul class="pms-tips">
+					<li class="">
+						<div class="name">满减</div>
+						<p>已享受满158减30 上不封顶</p>
+					</li>
+				</ul>
+			</li>
+			<li class="_2x2q-D1HfUB-t0Mz-xT6p2 clearfix" ng-repeat="item in goodlist track by $index">
+				<div class="lazyload-img-wraper img loaded">
+					<div class="lazyload-img" style="background-image: url({{item.verticalImage}});"></div>
+				</div>
+				<div class="info">
+					<h3><b></b>{{item.name}}</h3>
+					<div class="price">{{item.vipshopPrice}}</div>
+					<div class="_1RID7OuQz16ROtIrAVVNZF"><i class="operate icon-remove" ng-click="remove($event,item.gid,item.gid)"></i><span class="item-count">{{item.qty}}</span><i class="operate icon-add" ng-click="add($event,item.gid)"></i><i ng-click="del($event,item.gid)" class="img-icon cart-delete"></i></div>
+				</div>
+			</li>
+			
+		</ul>
+		<div class="total-wrap clearfix"><span class="total-label">商品合计：</span><span class="total-num"><span>
+			
+<span class="price highlight">{{sum|currency:'':2}}</span></span>
+			</span>
+			<hr>
+			<ul class="pms-tips">
+				<li class="">
+					<div class="name"><b>免邮</b></div>
+					<p>本单已免运费</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
