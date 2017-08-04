@@ -18,7 +18,7 @@
 			url: "/register",
 			templateUrl:'./template/register.html'
 		})
-		$urlRouterProvider.when('','/index/topics')
+		$urlRouterProvider.when('','/index')
 		
 		
 	}])
