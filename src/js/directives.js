@@ -163,7 +163,6 @@
 		return {
 			templateUrl: "directive/buycar/xbuycontent.html",
 			link: function(scope, ele, attr) {
-//				tool.time(0.1)
 
 				console.log("buycontent加载")
 				//把商品存进cookies中,商品id,数量[{gid:222922944,qty:2},{gid:82116607,qty:3}]
@@ -263,7 +262,7 @@
 					scope.goodlist.forEach(function(items, i) {
 						scope.sum += items.qty * items.vipshopPrice
 					})
-					tool.time(20)
+					tool.time(0.1)
 //					console.log(scope.sum)
 				}
 
