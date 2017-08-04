@@ -17,6 +17,12 @@
 		}).state('register',{
 			url: "/register",
 			templateUrl:'./template/register.html'
+		}).state('buycar',{
+			url: "/buycar",
+			templateUrl:'./template/buycar.html'
+		}).state('address',{
+			url: "/address",
+			templateUrl:'./template/address.html'
 		})
 		$urlRouterProvider.when('','/index/topics')
 		
