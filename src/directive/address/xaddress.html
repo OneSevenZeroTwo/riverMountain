@@ -1,0 +1,23 @@
+<ul class="add">
+	<li><label>省份</label>
+		<select name="province" ng-model="provinceId" ng-change="getCity()">
+			<option ng-repeat="n in province track by $index" value="{{n.id}}" ng-bind-html="n.name |html" >北京市</option>
+		</select>
+	</li>
+	<li><label>城市</label>
+		<select name="city" ng-model="cityId" ng-change="getTown()">
+			<option  ng-repeat="n in city track by $index" value="{{n.id}}">{{n.name}}</option>
+		</select>
+	</li>
+	<li><label>县/区</label>
+		<select name="town" ng-model="townId" ng-change="getStreet()">			
+			<option ng-repeat="n in town track by $index" value="{{n.id}}">{{n.name}}</option>
+		</select>
+	</li>
+	<li><label>街道</label>
+		<select name="street">
+			<option ng-repeat="s in street track by $index" value="{{s.id}}" ng-bind="s.name"></option>
+		</select>
+	</li>
+	<li class="detail-address"><label for="address">详细地址</label><textarea name="address" id="address" placeholder="填写路名，门牌号，请勿重复填写省市区" type="text"></textarea></li>
+</ul>

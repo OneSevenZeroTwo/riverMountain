@@ -3277,7 +3277,7 @@
 }
 
 ._3B9DPp9SnjglLyD3r_EVFW {
-    padding-bottom: .75rem;
+    /*padding-bottom: .75rem;*/
     min-height: 3rem
 }
 
@@ -3458,7 +3458,8 @@
 }
 
 .A1Ow35bk3Kge0xjFxKPOi ul {
-    background-color: #fff
+    background-color: #fff;
+    margin-bottom: 67px;
 }
 
 .A1Ow35bk3Kge0xjFxKPOi .rebuyProduct {

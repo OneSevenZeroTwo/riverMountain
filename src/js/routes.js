@@ -8,6 +8,9 @@
 		}).state('index.topics',{
 			url: "/topics",
 			templateUrl:'./template/topics.html'
+		}).state('brand',{
+			url: "/brand",
+			templateUrl:'./template/brand.html'
 		}).state('detail',{
 			url: "/detail/:id",
 			templateUrl:'./template/detail.html'
@@ -17,6 +20,12 @@
 		}).state('register',{
 			url: "/register",
 			templateUrl:'./template/register.html'
+		}).state('buycar',{
+			url: "/buycar",
+			templateUrl:'./template/buycar.html'
+		}).state('address',{
+			url: "/address",
+			templateUrl:'./template/address.html'
 		})
 		$urlRouterProvider.when('','/index')
 		
