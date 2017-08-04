@@ -8,6 +8,9 @@
 		}).state('index.topics',{
 			url: "/topics",
 			templateUrl:'./template/topics.html'
+		}).state('brand',{
+			url: "/brand",
+			templateUrl:'./template/brand.html'
 		}).state('detail',{
 			url: "/detail/:id",
 			templateUrl:'./template/detail.html'
