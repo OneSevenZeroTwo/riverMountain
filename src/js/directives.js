@@ -81,7 +81,7 @@
 				scope.arr = [];
 				scope.page = 1;
 				scope.isLoadMore = 0;
-
+//				封装ajax
 				scope.shows = function() {
 
 					$http({
