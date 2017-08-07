@@ -9,7 +9,7 @@
 							<form class="_1UyOYKRtptKK0v1qcKLhQS">
 								<div class="_3q4mrjJOs4yXQXAAlhODfw">
 									<input type="text" name="keyword" placeholder="搜索商品" maxlength="15" class="keyword"><i class="icon-cancel ui-decoration-hyperlink"></i></div>
-								<div class="goback ui-decoration-hyperlink qu">取消</div>
+								<div class="goback ui-decoration-hyperlink qu" ng-click="changehide()">取消</div>
 								<div class="goback ui-decoration-hyperlink shou" style="display: none;">搜索</div>
 							</form>
 						</div><span class="right-btn ui-decoration-hyperlink " ng-click="changehide()"><i class="img-icon home"></i></span></header>
@@ -56,7 +56,7 @@
 	
 	@keyframes moveLeft {
 		from {
-			transform: translateX(-320px);
+			transform: translateX(-375px);
 		}
 		to {}
 	}
@@ -75,7 +75,7 @@
 	@keyframes moveRight {
 		from {}
 		to {
-			transform: translateX(-320px);
+			transform: translateX(-375px);
 		}
 	}
 	
@@ -90,11 +90,11 @@
 	}
 	
 	.nav-content {
-		width: 320px;
+		width: 375px;
 		position: fixed;
 		min-height: 100%;
 		top: 0;
-		left: 320px;
+		left: 375px;
 		background-color: #fff;
 		/*调试代码时经常使用border，帮我们定位到div的一个区域*/
 		/*border: 1px solid black;*/
