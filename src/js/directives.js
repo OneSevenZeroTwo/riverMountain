@@ -132,45 +132,29 @@
 		return {
 			templateUrl: "directive/chuanyeIndex/xtop.html",
 			link: function(scope, ele, attr) {
+				$(document).scroll(function() {
+					//					console.log(222)
+					if($(document).scrollTop() > 100) {
+						//				console.log(23322)
+						$('.icon4').fadeIn();
 
+					} else {
+						$('.icon4').fadeOut()
+
+					}
+
+				});
+				//按钮top
+				$('.icon4').on('click', function() {
+					console.log('11111')
+					$('body,html').stop(true).animate({
+						scrollTop: 0
+					}, 500)
+				})
 			}
 		}
 	})
-	// 侧边栏
-	//	directives.controller("indexCtrl", function($scope) {
-	//		$scope.directionTo = function(direction) {
-	//			console.log(1111111)
-	//			$scope.$emit("sidebar-move-left", direction)
-	//		}
-	//	})
-	//liang..................................................................list
 
-	/*return {
-		templateUrl: "directive/chuanyeIndex/xtop.html",
-		link: function(scope, ele, attr) {
-			//返回顶部
-			$(document).scroll(function() {
-				//					console.log(222)
-				if($(document).scrollTop() > 100) {
-					//				console.log(23322)
-					$('.icon4').fadeIn();
-
-				} else {
-					$('.icon4').fadeOut()
-
-				}
-
-			});
-			//按钮top
-			$('.icon4').on('click', function() {
-				console.log('11111')
-				$('body,html').stop(true).animate({
-					scrollTop: 0
-				}, 500)
-			})
-		}
-	}*/
-	//}])
 	// 侧边栏
 	directives.directive('xindexsidebar', ['$state', '$http', '$rootScope', '$window', function($state, $http, $rootScope, $window) {
 		return {
@@ -183,6 +167,8 @@
 				console.log('sidebar')
 				scope.sideout = false
 				scope.sidein = false
+				scope.ccc = ''
+
 				scope.changeshow = function() {
 					console.log("侧边栏出来")
 					scope.sideout = true
@@ -202,6 +188,37 @@
 					scope.news = data.data.data
 
 				})
+
+				$(".keyword").bind('input propertychange', function() {
+					scope.ccc = $(".keyword").val()
+					console.log(scope.ccc)
+					$http({
+						methods: 'get',
+						url: 'http://w.lefeng.com/api/neptune/search/suggestion/v1?keyword=' + scope.ccc + '&count=15'
+					}).then(function(data) {
+						scope.seel = data.data.data
+						console.log(scope.seel)
+
+					})
+					if($('.keyword').val() === '') {
+						$(".shou").hide()
+						$(".qu").show()
+
+					} else {
+						$(".shou").show()
+						$(".qu").hide()
+
+					}
+				})
+				$('.jVmPCc8t9niUxq0aC4XcD').on('click', "dd", function() {
+					$(".keyword").val($(this).html())
+
+				})
+				$('._2zSykbfnp9HX1QFp7QarD5').on('click', "dd", function() {
+					$(".keyword").val($(this).html())
+
+				})
+
 			}
 		}
 	}])
@@ -767,7 +784,9 @@
 						brandId: scope.elseArr[randomNum(0, scope.elseArr.length - 1)]
 					}
 				}).then(function(res) {
-					//					console.log(res.data.data)
+
+					console.log(res.data.data)
+
 					scope.elesGoods = res.data.data
 				})
 
@@ -780,6 +799,7 @@
 					//刷新页面重新加载cookie
 					location.reload()
 				}
+
 			}
 
 		}
