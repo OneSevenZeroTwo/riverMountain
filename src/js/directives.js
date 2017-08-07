@@ -117,60 +117,8 @@
 			}
 		}
 	}])
-	// 首页的底部
-	directives.directive('xindexfloor', function() {
-		return {
-			templateUrl: "directive/chuanyeIndex/xfloor.html",
-			link: function(scope, ele, attr) {
-
-			}
-		}
-	})
-	// 回到顶部按钮
-	directives.directive('xindextop', function() {
-
-		return {
-			templateUrl: "directive/chuanyeIndex/xtop.html",
-			link: function(scope, ele, attr) {
-
-			}
-		}
-	})
-	// 侧边栏
-	//	directives.controller("indexCtrl", function($scope) {
-	//		$scope.directionTo = function(direction) {
-	//			console.log(1111111)
-	//			$scope.$emit("sidebar-move-left", direction)
-	//		}
-	//	})
-	//liang..................................................................list
-
-	/*return {
-		templateUrl: "directive/chuanyeIndex/xtop.html",
-		link: function(scope, ele, attr) {
-			//返回顶部
-			$(document).scroll(function() {
-				//					console.log(222)
-				if($(document).scrollTop() > 100) {
-					//				console.log(23322)
-					$('.icon4').fadeIn();
-
-				} else {
-					$('.icon4').fadeOut()
-
-				}
-
-			});
-			//按钮top
-			$('.icon4').on('click', function() {
-				console.log('11111')
-				$('body,html').stop(true).animate({
-					scrollTop: 0
-				}, 500)
-			})
-		}
-	}*/
-	//}])
+	
+	
 	// 侧边栏
 	directives.directive('xindexsidebar', ['$state', '$http', '$rootScope', '$window', function($state, $http, $rootScope, $window) {
 		return {
@@ -183,6 +131,10 @@
 				console.log('sidebar')
 				scope.sideout = false
 				scope.sidein = false
+
+
+				scope.ccc = ''
+
 				scope.changeshow = function() {
 					console.log("侧边栏出来")
 					scope.sideout = true
@@ -200,6 +152,36 @@
 				}).then(function(data) {
 					console.log(data.data.data)
 					scope.news = data.data.data
+
+				})
+
+				$(".keyword").bind('input propertychange', function() {
+					scope.ccc = $(".keyword").val()
+					console.log(scope.ccc)
+					$http({
+						methods: 'get',
+						url: 'http://w.lefeng.com/api/neptune/search/suggestion/v1?keyword=' + scope.ccc + '&count=15'
+					}).then(function(data) {
+						scope.seel = data.data.data
+						console.log(scope.seel)
+
+					})
+					if($('.keyword').val() === '') {
+						$(".shou").hide()
+						$(".qu").show()
+
+					} else {
+						$(".shou").show()
+						$(".qu").hide()
+
+					}
+				})
+				$('.jVmPCc8t9niUxq0aC4XcD').on('click', "dd", function() {
+					$(".keyword").val($(this).html())
+
+				})
+				$('._2zSykbfnp9HX1QFp7QarD5').on('click', "dd", function() {
+					$(".keyword").val($(this).html())
 
 				})
 			}
@@ -308,7 +290,13 @@
 						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 
 						scope.brandcontentreq()
+
 					})
+				})
+				// 点击筛选里面的字元素
+				$('.filterBody').on('click', 'dd', function() {
+					$(this).addClass('checked').siblings().removeClass('checked');
+					scope.catName3 = $(this).text();
 
 				})
 				// 点击筛选隐藏
@@ -316,6 +304,7 @@
 				$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
 					$('._3FmPsJubKs-Ys_FH8ksXO4').addClass('active')
 					$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+
 					$('._1u1iuEeNLuruAqLXg8xrdz').hide();
 					$http({
 						methods: "GET",
@@ -326,6 +315,7 @@
 					}).then(function(data) {
 						console.log(data)
 						scope.goodslist = data.data.data
+
 						$('._3FmPsJubKs-Ys_FH8ksXO4').removeClass('active')
 						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 
@@ -384,12 +374,16 @@
 					$(this).addClass('checked').siblings().removeClass('checked');
 					scope.catName3 = $(this).text();
 
+
+
+					})
 				})
 			}
 		}
 	}])
 	// 内容部分组件
 	directives.directive('xbrandcontent', ['$http', '$rootScope', function($http, $rootScope) {
+
 
 		return {
 			templateUrl: "directive/xbrandcontent.html",
@@ -411,7 +405,6 @@
 						$('._3FmPsJubKs-Ys_FH8ksXO4').removeClass('active')
 						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 					})
-
 				}
 				scope.brandcontentreq()
 			}
@@ -490,7 +483,39 @@
 	}])
 
 	//tang.................................................................detail
+	//头部广告部分
+	directives.directive('xad', ['$location', '$http', function($location, $http) {
+		return {
+			templateUrl: 'directive/Tdetail/xad.html',
+			link: function(scope, ele, attr) {
+				$('.left').on('click', function() {
+					console.log(555)
+					$('.adver').hide()
+
+				});
+				//发送ajax请求,获取页面所需数据
+				(function() {
+					//获取商品ID
+					console.log($location.url().slice(-8));
+					var gidnum = $location.url().slice(-8);
+					$http({
+						type: "get",
+						url: "http://w.lefeng.com/api/neptune/goods/detail_with_stock/v1",
+						params: {
+							needBrandInfo: true,
+							gid: gidnum
+
+						}
+					}).then(function(res) {
+						console.log(res.data.data)
+						scope.msg = res.data.data
+					})
+				})();
+			}
+		}
+	}])
 	//头部
+
 	directives.directive('xdheader', ['$location', '$http', function($location, $http) {
 		return {
 			templateUrl: 'directive/Tdetail/xdheader.html',
@@ -507,6 +532,7 @@
 				$('.home').on('click', function() {
 					location.href = '#!/index'
 				});
+
 				//发送ajax请求,获取页面所需数据
 				(function() {
 					//获取商品ID
@@ -599,11 +625,13 @@
 		}
 	})
 	//底部购物车
-	directives.directive('xdcar', ['tool', function(tool) {
+
+	directives.directive('xdcar', function() {
 		return {
 			templateUrl: 'directive/Tdetail/xdcar.html',
 			link: function(scope, ele, attr) {
 				//函数逻辑
+
 				scope.bycar = function() {
 					tool.stayTwenty('aaa', scope.gidnum, "add")
 					location.href = "#!/buycar"
@@ -637,6 +665,7 @@
 				more();
 				//				console.log($window.height)
 
+
 				//点击商品进入详情页
 				scope.etail = function() {
 					console.log($(this))
@@ -657,11 +686,19 @@
 					//						console.log($(window).scrollTop())
 					if($(window).scrollTop() > 500) {
 						$('.totop').addClass('active')
+
 						$('.totop').on('click', function() {
 							//								console.log('11111')
 							$('body,html').stop(true).animate({
 								scrollTop: 0
 							}, 500)
+
+						$('.active').on('click', function() {
+							$('body').animate({
+								scrollTop: 0
+							});
+							return false;
+
 						})
 
 					} else {
@@ -856,7 +893,9 @@
 						brandId: scope.elseArr[randomNum(0, scope.elseArr.length - 1)]
 					}
 				}).then(function(res) {
-					//					console.log(res.data.data)
+
+					console.log(res.data.data)
+
 					scope.elesGoods = res.data.data
 				})
 
@@ -869,6 +908,7 @@
 					//刷新页面重新加载cookie
 					location.reload()
 				}
+
 			}
 
 		}
