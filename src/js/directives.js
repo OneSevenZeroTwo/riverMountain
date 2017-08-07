@@ -167,6 +167,8 @@
 				scope.catName3 = '';
 				//点击切换价格销量
 				$('.sort').parent().on('click', function() {
+					$('._3FmPsJubKs-Ys_FH8ksXO4').addClass('active')
+					$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 					$(this).addClass('sorted').siblings().removeClass('sorted');
 					$(this).siblings().children().removeClass('asc desc')
 					if($(this).children().hasClass('asc')) {
@@ -195,6 +197,8 @@
 
 				// 点击筛选出现
 				$('i.filter').parent().on('click', function() {
+					$('._3FmPsJubKs-Ys_FH8ksXO4').addClass('active')
+					$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 					$('._1u1iuEeNLuruAqLXg8xrdz').show();
 					$('.sort').removeClass('asc desc');
 					$http({
@@ -206,6 +210,9 @@
 					}).then(function(data){
 						console.log(data)
 						scope.ddclass = data.data.data
+						// 回调遮罩层
+						$('._3FmPsJubKs-Ys_FH8ksXO4').removeClass('active')
+						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 						
 					})
 				})
@@ -218,6 +225,8 @@
 				// 点击筛选隐藏
 				// http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=755041472&start=1&catName3=%E9%9D%A2%E8%86%9C
 				$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
+					$('._3FmPsJubKs-Ys_FH8ksXO4').addClass('active')
+					$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 					$('._1u1iuEeNLuruAqLXg8xrdz').hide();
 					$http({
 						methods:"GET",
@@ -228,6 +237,8 @@
 					}).then(function(data){
 						console.log(data)
 						scope.goodslist = data.data.data
+						$('._3FmPsJubKs-Ys_FH8ksXO4').removeClass('active')
+						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 						
 					})
 				})
@@ -255,8 +266,11 @@
 						// }
 					}).then(function(data){
 						console.log(data)
-						scope.goodslist = data.data.data
 						
+						scope.goodslist = data.data.data
+						// 回调遮罩层
+						$('._3FmPsJubKs-Ys_FH8ksXO4').removeClass('active')
+						$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 					})
 				}
 				scope.brandcontentreq()
@@ -286,6 +300,31 @@
 		return {
 			templateUrl: "directive/xbrandgotop.html",
 			link: function(scope, ele, attr) {
+				// 滑动滚动条
+				console.log($('.goodslist'))
+				$('.goodslist').eq(0).scroll(function(){
+					console.log('.goodslist')
+					// 滚动条距离顶部的距离 大于 200px时
+					if($(window).scrollTop() >= 200){
+						console.log(666)
+						$("._3qKxepJBXFjxj1GqSe_v_v").addClass('active'); // 开始淡入
+					} else{
+						$("._3qKxepJBXFjxj1GqSe_v_v").removeClass('active'); // 如果小于等于 200 淡出
+					}
+				});
+
+			  // 	var oTop = document.getElementsByClassName("._3qKxepJBXFjxj1GqSe_v_v")[0];
+			  // 	var screenw = document.documentElement.clientWidth || document.body.clientWidth;
+			  // 	var screenh = document.documentElement.clientHeight || document.body.clientHeight;
+			  // 	oTop.style.left = screenw - oTop.offsetWidth +"px";
+			 	// oTop.style.top = screenh - oTop.offsetHeight + "px";
+			  // 	window.onscroll = function(){
+			  //   	var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+			  //   	oTop.style.top = screenh - oTop.offsetHeight + scrolltop +"px";
+			  // 	}
+			  // 	oTop.onclick = function(){
+			  //   	document.documentElement.scrollTop = document.body.scrollTop =0;
+			  // 	}
 				
 			}
 		}
