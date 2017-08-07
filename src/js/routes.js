@@ -14,6 +14,9 @@
 		}).state('detail',{
 			url: "/detail/:id",
 			templateUrl:'./template/detail.html'
+		}).state('common',{
+			url: "/common",
+			templateUrl:'./template/common.html'
 		}).state('login',{
 			url: "/login",
 			templateUrl:'./template/login.html'
