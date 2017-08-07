@@ -403,16 +403,14 @@
 
 	//tang.................................................................detail
 	//头部
-	directives.directive('xdheader', ['$location', '$http', function($location, $http) {
+	directives.directive('xdheader', ['$location', '$http', '$state', function($location, $http, $state) {
 			return {
 				templateUrl: 'directive/Tdetail/xdheader.html',
 				link: function(scope, ele, attr) {
 					$('.left').on('click', function() {
-						console.log(555)
 						$('.adver').hide()
-
 					});
-					
+
 					$('.icon-arrow-left').on('click', function() {
 						window.history.go(-1);
 					});
@@ -421,16 +419,15 @@
 					});
 					//发送ajax请求,获取页面所需数据
 					(function() {
-						//获取商品ID
-						console.log($location.url().slice(-8));
-						scope.gidnum = $location.url().slice(-8);
+						console.log($state.params.id)
+							//获取商品ID
+						scope.gidnum = $state.params.id;
 						$http({
 							type: "get",
 							url: "http://w.lefeng.com/api/neptune/goods/detail_with_stock/v1",
 							params: {
 								needBrandInfo: true,
 								gid: scope.gidnum
-
 							}
 						}).then(function(res) {
 							console.log(res.data.data)
@@ -511,14 +508,14 @@
 			}
 		})
 		//底部购物车
-	directives.directive('xdcar',['tool', function(tool) {
+	directives.directive('xdcar', ['tool', function(tool) {
 			return {
 				templateUrl: 'directive/Tdetail/xdcar.html',
 				link: function(scope, ele, attr) {
 					//函数逻辑
-					scope.bycar=function(){
-						tool.stayTwenty('aaa',scope.gidnum,"add")
-						location.href="#!/buycar"
+					scope.bycar = function() {
+						tool.stayTwenty('aaa', scope.gidnum, "add")
+						location.href = "#!/buycar"
 					};
 				}
 			}
@@ -548,11 +545,13 @@
 					};
 					more();
 					//				console.log($window.height)
-					
+
 					//点击商品进入详情页
-					scope.etail=function(){
-						console.log($(this))
-						console.log(333)
+					scope.etail = function(e) {
+						//商品ID
+						scope.gidnum = $(e.target).closest('li').attr('name');
+						location.href = "#!/detail/" + scope.gidnum;
+						window.location.reload()
 					}
 
 				}
@@ -570,7 +569,7 @@
 						if($(window).scrollTop() > 500) {
 							$('.totop').addClass('active')
 							$('.totop').on('click', function() {
-//								console.log('11111')
+								//								console.log('11111')
 								$('body,html').stop(true).animate({
 									scrollTop: 0
 								}, 500)
