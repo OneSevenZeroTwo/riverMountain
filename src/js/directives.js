@@ -218,6 +218,9 @@
 					$(".keyword").val($(this).html())
 
 				})
+//				$('.shou').on('click',function(){
+//					
+//				})
 
 			}
 		}
