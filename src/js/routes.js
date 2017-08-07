@@ -9,7 +9,7 @@
 			url: "/topics",
 			templateUrl:'./template/topics.html'
 		}).state('brand',{
-			url: "/brand",
+			url: "/brand/:brandId",
 			templateUrl:'./template/brand.html'
 		}).state('detail',{
 			url: "/detail/:id",

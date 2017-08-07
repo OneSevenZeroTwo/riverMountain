@@ -247,16 +247,19 @@
 		}
 	}])
 	// 头部组件
-	directives.directive('xbrandheader', ['$http', '$rootScope', function($http, $rootScope) {
+	directives.directive('xbrandheader', ['$http', '$rootScope','$state', function($http, $rootScope,$state) {
 		return {
 			templateUrl: "directive/xbrandheader.html",
 			link: function(scope, ele, attr) {
+				console.log($state)
+				scope.brandId = $state.params.brandId
 				scope.brandheadreq = function() {
 					$http({
 						methods: "GET",
-						url: "http://w.lefeng.com/api/neptune/brand/details/v1?brandId=755041472",
+						url: "http://w.lefeng.com/api/neptune/brand/details/v1",
 						params: {
 							// page:page++
+							brandId:scope.brandId
 						}
 					}).then(function(data) {
 						console.log(data)
@@ -266,6 +269,12 @@
 					})
 				}
 				scope.brandheadreq()
+				scope.home = function() {
+					location.href = "#!/index"
+				}
+				scope.back = function() {
+					history.back()
+				}
 			}
 		}
 	}])
@@ -311,9 +320,10 @@
 					$('.sort').removeClass('asc desc');
 					$http({
 						methods: "GET",
-						url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1?brandId=755041472",
+						url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
 						params: {
 							// page:page++
+							brandId:scope.brandId
 						}
 					}).then(function(data) {
 						console.log(data)
@@ -333,9 +343,8 @@
 					$('._1u1iuEeNLuruAqLXg8xrdz').hide();
 					$http({
 						methods: "GET",
-						url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=755041472&&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3,
+						url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId="+scope.brandId+"&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3,
 						params: {
-
 						}
 					}).then(function(data) {
 						console.log(data)
@@ -352,16 +361,20 @@
 		}
 	}])
 	// 内容部分组件
-	directives.directive('xbrandcontent', ['$http', '$rootScope', function($http, $rootScope) {
+	directives.directive('xbrandcontent', ['$http', 'tool', function($http, tool) {
 		return {
 			templateUrl: "directive/xbrandcontent.html",
 			link: function(scope, ele, attr) {
 				scope.page = 0;
 				scope.goodslist = [];
+				scope.buy=function(gid){
+					scope.gid = gid
+					tool.stayTwenty('aaa',scope.gid,"add")
+				}
 				scope.brandcontentreq = function() {
 					$http({
 						methods: "GET",
-						url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=755041472&start=1&sort=" + scope.sorts,
+						url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId="+scope.brandId+"&start=1&sort=" + scope.sorts,
 						// params:{
 						// 	page:page++
 						// }
@@ -376,11 +389,13 @@
 		}
 	}])
 	// 加入购物车部分组件
-	directives.directive('xbrandcar', ['$window', '$rootScope', function($window, $rootScope) {
+	directives.directive('xbrandcar', ['$window', 'tool', function($window, tool) {
 		return {
 			templateUrl: "directive/xbrandcar.html",
 			link: function(scope, ele, attr) {
-
+				scope.toButcar=function(){					
+				location.href = "#!/buycar"
+				}
 			}
 		}
 	}])
