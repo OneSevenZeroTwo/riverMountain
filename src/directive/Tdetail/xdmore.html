@@ -1,0 +1,37 @@
+<div class="chosen-product-section">
+	<h3>浏览本商品的用户还买了</h3>
+	<div>
+		<ul class="clearfix">
+			<li class="_1hL35gnhzhExU3asjbAuv4 _3dznqSdmEYuOI-7s36xTkF Ekwoj4AzxaaLKz3hCWWQv clearfix" ng-repeat="good in more" name="{{good.goods.gid}}" ng-Click="etail()">
+				<!-- react-empty: 1567 -->
+				<div class="lazyload-img-wraper img loaded">
+					<div class="lazyload-img" style="transition: none; background-image: url(&quot;{{good.goods.image}}&quot;);"></div>
+				</div>
+				<div class="info">
+					<div class="tag-wrap"></div>
+					<div class="name-wrap">
+						<h2>{{good.goods.brandStoreName}}</h2>
+						<h3>{{good.goods.productName}}</h3></div>
+					<div class="buyer-item"><i class="buyer-num-icon"></i><span class="buyer-num"><!-- react-text: 1578 -->{{good.goods.buyNumMax}}<!-- /react-text --><!-- react-text: 1579 -->人购买<!-- /react-text --></span></div>
+					<div class="price-wrap"><span class="price">{{good.goods.vipshopPrice}}</span><br><span class="market-price">{{good.goods.marketPrice}}</span><i class="cart"></i></div>
+				</div>
+			</li>
+			
+		</ul>
+		<div class="listview-loading">
+			<div class="_1nBjCOXCldj6qlOhJ9CvQA _1bIecDkNapDGLpwch2H9cH ispinner--animating">
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+				<div class="ispinner__blade"></div>
+			</div><span class="caption">商品加载中...</span></div>
+	</div>
+</div>

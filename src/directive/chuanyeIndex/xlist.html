@@ -1,16 +1,15 @@
 <div id="goods">
 	<ul class="clearfix" id="clearfix">
-		<li class="_12WPUxCZhYhpNDEXav7r1j">
+		<li class="_12WPUxCZhYhpNDEXav7r1j" ng-repeat="n in arr" ng-click="goToDetail(n.bid)">
 			<a href="/brand/800035815">
 				<div class="lazyload-img-wraper loaded" style="height: 141px;">
-					<div class="lazyload-img" style="background-image: url(&quot;http://b.appsimg.com/2017/06/20/9783/1497952441566_960x423_80.jpg&quot;);"></div>
+					<div class="lazyload-img" ng-style="{'background-image': 'url({{n.brandImage}})'}"></div>
 				</div>
 				<div class="pms-wrap">
-					<p>满199减100 上不封顶</p>
+					<p>{{n.pms}}</p>
 				</div>
 			</a>
-			<p class="brandInfo"><span>3.3折起</span>
-			</p>
+			<p class="brandInfo"><span>{{n.agio}}</span>{{n.name}}
 		</li>
 	</ul>
 </div>
