@@ -1,13 +1,13 @@
 <div class="goodslist">
 <!-- style="height: 1180px;" -->
     <ul class="clearfix">
-    	<li ng-repeat="item in goodslist" class="_3dznqSdmEYuOI-7s36xTkF Ekwoj4AzxaaLKz3hCWWQv clearfix" id="${item.gid}">
+    	<li ng-repeat="item in goodslist" class="_3dznqSdmEYuOI-7s36xTkF Ekwoj4AzxaaLKz3hCWWQv clearfix" id="{{item.goods.gid}}" name="{{item.goods.vendorProductId">
             <!-- react-empty: 2152 -->
-            <div class="lazyload-img-wraper img loaded">
+            <div class="lazyload-img-wraper img loaded" ng-click="clearfix($event)">
                 <div class="lazyload-img" style="transition: none; background-image: url(&quot;{{item.goods.verticalImage}}&quot;);">
                 </div>
             </div>
-            <div class="info">
+            <div class="info" ng-click="clearfix($event)">
                 <div class="tag-wrap"></div>
                 <div class="name-wrap">
                     <h2>{{item.goods.brandStoreName}}</h2>

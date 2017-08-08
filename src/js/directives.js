@@ -275,7 +275,7 @@
 					}
 				}
 			}])
-			// 中间部分组件
+			// brand筛选栏部分组件
 		directives.directive('xbrandcenter', ['$http', '$rootScope', function($http, $rootScope) {
 				return {
 					templateUrl: "directive/xbrandcenter.html",
@@ -285,6 +285,9 @@
 						scope.catName3 = '';
 						//点击切换价格销量
 						$('.sort').parent().on('click', function() {
+							// 页面渲染前遮罩层出现
+							$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+							console.log($('._2qMs9THP2bUpWIAG1OhCmP'))
 							$(this).addClass('sorted').siblings().removeClass('sorted');
 							$(this).siblings().children().removeClass('asc desc')
 							if($(this).children().hasClass('asc')) {
@@ -309,10 +312,14 @@
 
 							}
 							scope.brandcontentreq()
+							// 页面渲染后遮罩层隐藏
+							
 						})
 
 						// 点击筛选出现
 						$('i.filter').parent().on('click', function() {
+								//出现遮罩层
+								$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 								$('._1u1iuEeNLuruAqLXg8xrdz').show();
 								$('.sort').removeClass('asc desc');
 								$http({
@@ -325,6 +332,8 @@
 								}).then(function(data) {
 									console.log(data)
 									scope.ddclass = data.data.data
+									//页面数据渲染后遮罩层隐藏
+									$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 
 								})
 							})
@@ -337,6 +346,7 @@
 							// 点击筛选隐藏
 							// http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=755041472&start=1&catName3=%E9%9D%A2%E8%86%9C
 						$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
+							$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 							$('._1u1iuEeNLuruAqLXg8xrdz').hide();
 							$http({
 								methods: "GET",
@@ -345,6 +355,7 @@
 							}).then(function(data) {
 								console.log(data)
 								scope.goodslist = data.data.data
+								$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 
 							})
 						})
@@ -356,31 +367,63 @@
 					}
 				}
 			}])
-			// 内容部分组件
+			// brand内容部分组件
 		directives.directive('xbrandcontent', ['$http', 'tool', function($http, tool) {
 				return {
 					templateUrl: "directive/xbrandcontent.html",
 					link: function(scope, ele, attr) {
-						scope.page = 0;
+						scope.page = 1;
 						scope.goodslist = [];
+						scope.isLoadMore = 0;
 						scope.buy = function(gid) {
 							scope.gid = gid
 							tool.stayTwenty('aaa', scope.gid, "add")
 						}
 						scope.brandcontentreq = function() {
+							//遮罩出现
+							$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 							$http({
 								methods: "GET",
-								url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts,
+								url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=" +scope.page+ "&sort=" + scope.sorts,
 								// params:{
 								// 	page:page++
 								// }
 							}).then(function(data) {
 								console.log(data)
-								scope.goodslist = data.data.data
+								scope.goodslist=scope.goodslist.concat(data.data.data)
+								//页面完成后遮罩隐藏
+								$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+								scope.isLoadMore ++;
+
+								$('.clearfix').children('li').on('click',function(){
+									var id = $(this).attr('id')
+									// location.herf = '#!/datail/'+id
+									console.log(id)
+									// console.log($(this).children('li'))
+								})
 
 							})
 						}
 						scope.brandcontentreq()
+						// scope.isLoadMore--;
+
+						$(window).scroll(function() {
+							console.log($(window).scrollTop())
+							if($(window).scrollTop() >= scope.page * 900) {
+								scope.page++
+									console.log(scope.page)
+								scope.brandcontentreq()
+								scope.isLoadMore--;
+
+							}
+						})
+
+						scope.clearfix = function(e){
+							var id = $(e.target).closest('li').attr('id')
+							location.href = '#!/detail/'+id
+							console.log(id)
+							// console.log(this)
+						}	
 					}
 				}
 			}])
@@ -422,12 +465,30 @@
 			}
 		}])
 
-		// 点击回到顶部组件
+		// brand点击回到顶部组件
 		directives.directive('xbrandgotop', ['$window', '$rootScope', function($window, $rootScope) {
 			return {
 				templateUrl: "directive/xbrandgotop.html",
 				link: function(scope, ele, attr) {
+					$(document).scroll(function() {
+						//					console.log(222)
+						if($(document).scrollTop() > 200) {
+							//				console.log(23322)
+							$('._3qKxepJBXFjxj1GqSe_v_v').addClass('active');
 
+						} else {
+							$('._3qKxepJBXFjxj1GqSe_v_v').removeClass('active')
+
+						}
+
+					});
+					//按钮top
+					$('._3qKxepJBXFjxj1GqSe_v_v').on('click', function() {
+						console.log('11111')
+						$('body,html').stop(true).animate({
+							scrollTop: 0
+						}, 500)
+					})
 				}
 			}
 		}])
