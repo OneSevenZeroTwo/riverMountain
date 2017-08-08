@@ -5,6 +5,9 @@
 		$stateProvider.state('index',{
 			url: "/index",
 			templateUrl:'./template/index.html'
+		}).state('seek',{
+			url: "/seek",
+			templateUrl:'./template/seek.html'
 		}).state('index.topics',{
 			url: "/topics",
 			templateUrl:'./template/topics.html'
@@ -12,7 +15,7 @@
 			url: "/brand/:brandId",
 			templateUrl:'./template/brand.html'
 		}).state('brand2',{
-			url: "/brand2/:brandId",
+			url: "/brand2",
 			templateUrl:'./template/brand2.html'
 		}).state('hitao',{
 			url: "/hitao/:brandId",
