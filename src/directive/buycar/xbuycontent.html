@@ -12,10 +12,10 @@
 			</li>
 			<li class="_2x2q-D1HfUB-t0Mz-xT6p2 clearfix" ng-repeat="item in goodlist track by $index">
 				<div class="lazyload-img-wraper img loaded">
-					<div class="lazyload-img" style="background-image: url({{item.verticalImage}});"></div>
+					<div ng-click="toDetail(item.gid)" class="lazyload-img" style="background-image: url({{item.verticalImage}});"></div>
 				</div>
 				<div class="info">
-					<h3><b></b>{{item.name}}</h3>
+					<h3 ng-click="toDetail(item.gid)"><b></b>{{item.name}}</h3>
 					<div class="price">{{item.vipshopPrice}}</div>
 					<div class="_1RID7OuQz16ROtIrAVVNZF"><i class="operate icon-remove" ng-click="remove($event,item.gid,item.gid)"></i><span class="item-count">{{item.qty}}</span><i class="operate icon-add" ng-click="add($event,item.gid)"></i><i ng-click="del($event,item.gid)" class="img-icon cart-delete"></i></div>
 				</div>
