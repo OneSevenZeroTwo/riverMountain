@@ -12,9 +12,9 @@
 
 				//返回上一个页面
 				scope.back = function() {
-					$window.history.back();
-				}
-				//点击出现侧边栏,出现遮罩层
+						$window.history.back();
+					}
+					//点击出现侧边栏,出现遮罩层
 				$rootScope.sidebarstate = false;
 				$rootScope.sidebarstateOut = false;
 				scope.sideIn = function() {
@@ -133,7 +133,7 @@
 			templateUrl: "directive/chuanyeIndex/xtop.html",
 			link: function(scope, ele, attr) {
 				$(document).scroll(function() {
-					//					console.log(222)
+					console.log(222)
 					if($(document).scrollTop() > 100) {
 						//				console.log(23322)
 						$('.icon4').fadeIn();
@@ -312,31 +312,31 @@
 
 						}
 						scope.brandcontentreq()
-						
+
 					})
 
 					// 点击筛选出现
 					$('i.filter').parent().on('click', function() {
-						// 页面渲染前遮罩层出现
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
-						$('._1u1iuEeNLuruAqLXg8xrdz').show();
-						$('.sort').removeClass('asc desc');
-						$http({
-							methods: "GET",
-							url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
-							params: {
-								// page:page++
-								brandId: scope.brandId
-							}
-						}).then(function(data) {
-							console.log(data)
-							scope.ddclass = data.data.data
+							// 页面渲染前遮罩层出现
+							$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+							$('._1u1iuEeNLuruAqLXg8xrdz').show();
+							$('.sort').removeClass('asc desc');
+							$http({
+								methods: "GET",
+								url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
+								params: {
+									// page:page++
+									brandId: scope.brandId
+								}
+							}).then(function(data) {
+								console.log(data)
+								scope.ddclass = data.data.data
 
-							// 页面渲染后遮罩层隐藏
-							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+								// 页面渲染后遮罩层隐藏
+								$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 
+							})
 						})
-					})
 						// 点击筛选里面的字元素
 					$('.filterBody').on('click', 'dd', function() {
 							$(this).addClass('checked').siblings().removeClass('checked');
@@ -357,7 +357,6 @@
 							console.log(data)
 							scope.goodslist = data.data.data
 							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
-
 
 						})
 					})
@@ -391,16 +390,16 @@
 							// }
 						}).then(function(data) {
 							console.log(data)
-						
+
 							scope.goodslist = scope.goodslist.concat(data.data.data)
-							// 页面渲染后遮罩层隐藏
+								// 页面渲染后遮罩层隐藏
 							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
 							scope.isLoadMore++;
 						})
 					}
 					scope.brandcontentreq()
-					// scope.isLoadMore--;
-					
+						// scope.isLoadMore--;
+
 					$(window).scroll(function() {
 						console.log($(window).scrollTop())
 						if($(window).scrollTop() >= scope.page * 900) {
@@ -415,7 +414,7 @@
 						var id = $(e.target).closest('li').attr('id')
 						location.href = '#!/detail/' + id
 						console.log(id)
-						// console.log(this)
+							// console.log(this)
 					}
 
 					// 点击飞入购物车
@@ -448,22 +447,22 @@
 						var e_left = $('._2je43mssPpq3rot5HNhUEl').offset().left;
 						var e_top = $('._2je43mssPpq3rot5HNhUEl').offset().top;
 						setTimeout(function() {
-							$cloneImg.animate({
-								left: e_left,
-								top: e_top,
-								width: 40,
-								height: 40
-							}, function() {
+								$cloneImg.animate({
+									left: e_left,
+									top: e_top,
+									width: 40,
+									height: 40
+								}, function() {
 
-								// 删除动画图片
-								$cloneImg.remove();
-								list1.join(gid);
-								$('.countdown-wrap').find('span').text()
-								// var time = (list1.countDown())(1200);
-								//clearInterval(time)
-							});
-						}, 200)
-						// this.gid = gid;
+									// 删除动画图片
+									$cloneImg.remove();
+									list1.join(gid);
+									$('.countdown-wrap').find('span').text()
+										// var time = (list1.countDown())(1200);
+										//clearInterval(time)
+								});
+							}, 200)
+							// this.gid = gid;
 					})
 				}
 			}
@@ -631,7 +630,7 @@
 				}
 				//自执行请求评论数据
 				getCom();
-				scope.pingjia = function(){
+				scope.pingjia = function() {
 					location.href = "#!/common";
 				}
 			}
@@ -644,7 +643,7 @@
 					//函数逻辑
 					//请求评论数据
 					function pingjia() {
-						
+
 						scope.isLoadMore++;
 						console.log()
 						$http({
@@ -715,7 +714,7 @@
 
 		}])
 		//历史记录商品列表
-	directives.directive('xdmore', ['$location', '$http', '$window', function($location, $http, $window) {
+	directives.directive('xdmore', ['$location', '$http', function($location, $http) {
 			return {
 				templateUrl: 'directive/Tdetail/xdmore.html',
 				link: function(scope, ele, attr) {
@@ -766,24 +765,27 @@
 				templateUrl: 'directive/Tdetail/xdtop.html',
 				link: function(scope, ele, attr) {
 					//函数逻辑
-					$(window).on('scroll', function() {
-						//获取窗口滚动高度
-						//						console.log($(window).scrollTop())
-						if($(window).scrollTop() > 500) {
-							$('.totop').addClass('active')
-							$('.totop').on('click', function() {
-								//								console.log('11111')
-								$('body,html').stop(true).animate({
-									scrollTop: 0
-								}, 500)
-							})
+//					$('.top').addClass('active')
+					$('#detailScroll').scroll(function() {
+						console.log(222)
+						if($('#detailScroll').scrollTop() > 100) {
+							//				console.log(23322)
+							$('.top').addClass('active');
 
 						} else {
-							$('.totop').removeClass('active')
+							$('.top').removeClass('active')
+
 						}
 
-					})
-					console.log($(window).scrollTop())
+					});
+					$('.top').on('click', function() {
+							console.log('11111')
+							console.log($(window))
+							$('#detailScroll').stop(true).animate({
+								scrollTop: 0
+							}, 500)
+						})
+						//					console.log($(document).scrollTop())
 				}
 			}
 		})
@@ -818,11 +820,11 @@
 			templateUrl: "directive/buycar/xbuycontent.html",
 			link: function(scope, ele, attr) {
 				console.log("buycontent加载")
-				//把商品存进cookies中,商品id,数量[{gid:222922944,qty:2},{gid:82116607,qty:3}]
-				//调试
-				//				tool.stayTwenty('aaa',222922944,"add")
-				//				tool.stayTwenty('aaa',82116607,"add")
-				//				tool.stayTwenty('aaa',170038981,"add")
+					//把商品存进cookies中,商品id,数量[{gid:222922944,qty:2},{gid:82116607,qty:3}]
+					//调试
+					//				tool.stayTwenty('aaa',222922944,"add")
+					//				tool.stayTwenty('aaa',82116607,"add")
+					//				tool.stayTwenty('aaa',170038981,"add")
 
 				//				170038981
 				//根据登录注册状态传入用户名
@@ -853,28 +855,28 @@
 
 				//点击减少数量
 				scope.remove = function(e, gid) {
-					console.log($(e.target).next().html())
-					if($(e.target).next().html() == 1) {
-						$(e.target).addClass('disabled')
-						return
-					}
-					tool.stayTwenty('aaa', gid, "reduce")
-					//改变goodlist中的qty，用于计算总价
-					scope.goodlist.forEach(function(n) {
-						if(n.gid == gid) {
-							n.qty--
+						console.log($(e.target).next().html())
+						if($(e.target).next().html() == 1) {
+							$(e.target).addClass('disabled')
+							return
 						}
-					})
-					$(e.target).next().html(function(i, oldval) {
-						console.log(oldval)
-						return --oldval
-					})
-					scope.total()
-				}
-				//点击增加数量
+						tool.stayTwenty('aaa', gid, "reduce")
+							//改变goodlist中的qty，用于计算总价
+						scope.goodlist.forEach(function(n) {
+							if(n.gid == gid) {
+								n.qty--
+							}
+						})
+						$(e.target).next().html(function(i, oldval) {
+							console.log(oldval)
+							return --oldval
+						})
+						scope.total()
+					}
+					//点击增加数量
 				scope.add = function(e, gid) {
 					tool.stayTwenty('aaa', gid, "add")
-					//改变goodlist中的qty，用于计算总价
+						//改变goodlist中的qty，用于计算总价
 					scope.goodlist.forEach(function(n) {
 						if(n.gid == gid) {
 							n.qty++
@@ -893,14 +895,14 @@
 				scope.del = function(e, gid) {
 					$(e.target).closest('li').remove()
 					tool.stayTwenty('aaa', gid, "del")
-					//改变goodlist中的qty，用于计算总价
+						//改变goodlist中的qty，用于计算总价
 					scope.goodlist.forEach(function(n, i) {
 						if(n.gid == gid) {
 							scope.goodlist.splice(i, 1)
 						}
 					})
 					scope.total()
-					//判断如果购物车为空则显示empty组件
+						//判断如果购物车为空则显示empty组件
 					if(scope.goodlist.length == 0) {
 						scope.showEmpty = true
 					} else {
@@ -917,7 +919,7 @@
 						scope.sum += items.qty * items.vipshopPrice
 					})
 					tool.time(20)
-					//					console.log(scope.sum)
+						//					console.log(scope.sum)
 				}
 
 			}
@@ -982,7 +984,7 @@
 
 				scope.addBuyCar = function(gid) {
 					tool.stayTwenty('aaa', gid, "add")
-					//刷新页面重新加载cookie
+						//刷新页面重新加载cookie
 					location.reload()
 				}
 
@@ -1032,36 +1034,36 @@
 					})
 				}
 				scope.getProvince()
-				//选择省份后触发，请求城市
+					//选择省份后触发，请求城市
 				scope.getCity = function() {
-					console.log("Getcity")
-					$http({
-						url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
-						params: {
-							areaId: scope.provinceId
-						}
-					}).then(function(res) {
-						scope.city = res.data.data.list
-						//						scope.street =[]
-						//						scope.town =[]
+						console.log("Getcity")
+						$http({
+							url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
+							params: {
+								areaId: scope.provinceId
+							}
+						}).then(function(res) {
+							scope.city = res.data.data.list
+								//						scope.street =[]
+								//						scope.town =[]
 
-					})
+						})
 
-				}
-				//选择城市后触发，请求区镇
+					}
+					//选择城市后触发，请求区镇
 				scope.getTown = function() {
-					$http({
-						url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
-						params: {
-							areaId: scope.cityId
-						}
-					}).then(function(res) {
-						scope.town = res.data.data.list
+						$http({
+							url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
+							params: {
+								areaId: scope.cityId
+							}
+						}).then(function(res) {
+							scope.town = res.data.data.list
 
-					})
+						})
 
-				}
-				//选择城市后触发，请求区镇
+					}
+					//选择城市后触发，请求区镇
 				scope.getStreet = function() {
 					$http({
 						url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
