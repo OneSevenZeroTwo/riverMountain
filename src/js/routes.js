@@ -11,6 +11,12 @@
 		}).state('brand',{
 			url: "/brand/:brandId",
 			templateUrl:'./template/brand.html'
+		}).state('brand2',{
+			url: "/brand2/:brandId",
+			templateUrl:'./template/brand2.html'
+		}).state('hitao',{
+			url: "/hitao/:brandId",
+			templateUrl:'./template/hitao.html'
 		}).state('detail',{
 			url: "/detail/:id",
 			templateUrl:'./template/detail.html'

@@ -237,7 +237,7 @@
 	// brand遮罩层组件
 	directives.directive('xbrandmasklayer', ['$window', '$rootScope', function($window, $rootScope) {
 			return {
-				templateUrl: "directive/xbrandmasklayer.html",
+				templateUrl: "directive/brand/xbrandmasklayer.html",
 				link: function(scope, ele, attr) {
 
 				}
@@ -246,23 +246,27 @@
 		// brand头部组件
 	directives.directive('xbrandheader', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
 			return {
-				templateUrl: "directive/xbrandheader.html",
+				templateUrl: "directive/brand/xbrandheader.html",
 				link: function(scope, ele, attr) {
 					console.log($state)
+					// scope.brandName = '';
 					scope.brandId = $state.params.brandId
+					console.log(scope.brandId)
 					scope.brandheadreq = function() {
 						$http({
 							methods: "GET",
-							url: "http://w.lefeng.com/api/neptune/brand/details/v1",
+							url: "http://w.lefeng.com/api/neptune/brand/details/v1?brandId="+scope.brandId,
 							params: {
 								// page:page++
-								brandId: scope.brandId
+								// brandId: scope.brandId
 							}
 						}).then(function(data) {
 							console.log(data)
+							
 							scope.brandName = data.data.data.brandName
 							scope.brandHeadImg = data.data.data.brandHeadImg
-
+							console.log(scope.brandName)
+							console.log(scope.brandHeadImg)
 						})
 					}
 					scope.brandheadreq()
@@ -278,7 +282,7 @@
 		// brand筛选部分组件
 	directives.directive('xbrandcenter', ['$http', '$rootScope', function($http, $rootScope) {
 			return {
-				templateUrl: "directive/xbrandcenter.html",
+				templateUrl: "directive/brand/xbrandcenter.html",
 				link: function(scope, ele, attr) {
 					scope.page = 0;
 					scope.sorts = '';
@@ -370,62 +374,22 @@
 			}
 		}])
 		// brand内容部分组件
-	directives.directive('xbrandcontent', ['$http', 'tool', function($http, tool) {
+	directives.directive('xbrandcontent', ['$http',"$rootScope",'tool', function($http,$rootScope,tool) {
 			return {
-				templateUrl: "directive/xbrandcontent.html",
+				templateUrl: "directive/brand/xbrandcontent.html",
 				link: function(scope, ele, attr) {
+					console.log(attr.channel)
 					scope.page = 1;
 					scope.goodslist = [];
 					scope.isLoadMore = 0;
-					scope.buy = function(gid) {
+					scope.buy = function($event,gid) {
 						scope.gid = gid
 						tool.stayTwenty('aaa', scope.gid, "add")
-					}
-					scope.brandcontentreq = function() {
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
-						$http({
-							methods: "GET",
-							url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts,
-							// params:{
-							// 	page:page++
-							// }
-						}).then(function(data) {
-							console.log(data)
-						
-							scope.goodslist = scope.goodslist.concat(data.data.data)
-							// 页面渲染后遮罩层隐藏
-							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
-							scope.isLoadMore++;
-						})
-					}
-					scope.brandcontentreq()
-					// scope.isLoadMore--;
-					
-					$(window).scroll(function() {
-						console.log($(window).scrollTop())
-						if($(window).scrollTop() >= scope.page * 900) {
-							scope.page++
-								console.log(scope.page)
-							scope.brandcontentreq()
-							scope.isLoadMore--;
-						}
-					})
-
-					scope.clearfix = function(e) {
-						var id = $(e.target).closest('li').attr('id')
-						location.href = '#!/detail/' + id
-						console.log(id)
-						// console.log(this)
-					}
-
-					// 点击飞入购物车
-					$('.info').on('click', '.cart', function() {
-
 						//生成图片
 						var $cloneImg = $('<div></div>');
-						var s_left = $(this).offset().left;
-						var s_top = $(this).offset().top;
-						var gid = $(this).parent().parent().parent().attr('id');
+						var s_left = $($event.target).offset().left;
+						var s_top = $($event.target).offset().top;
+						var gid = $($event.target).parent().parent().parent().attr('id');
 
 						console.log(gid)
 
@@ -457,22 +421,76 @@
 
 								// 删除动画图片
 								$cloneImg.remove();
-								list1.join(gid);
+								// list1.join(gid);
 								$('.countdown-wrap').find('span').text()
+								// scope.countDown()
 								// var time = (list1.countDown())(1200);
 								//clearInterval(time)
 							});
 						}, 200)
-						// this.gid = gid;
+					}
+										$http({
+						methods: 'get',
+						url: 'http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword=' + $rootScope.keyword+ '&page=1'
+					}).then(function(data) {
+						scope.arr = data.data.data
+						console.log(scope.arr)
 					})
+
+					scope.urlList = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts
+					scope.urlSraech = 'http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword=' + "香水"+ '&page=1'
+					scope.api = scope.urlList
+
+					if(attr.channel =="list"){
+						scope.api = scope.urlList
+					}else if(attr.channel =="search"){
+						scope.api = scope.urlSraech
+					}
+					scope.brandcontentreq = function() {
+						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						$http({
+							methods: "GET",
+							url:scope.api,
+							// params:{
+							// 	page:page++
+							// }
+						}).then(function(data) {
+							console.log(data)
+						
+							scope.goodslist = scope.goodslist.concat(data.data.data)
+							// 页面渲染后遮罩层隐藏
+							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+							scope.isLoadMore++;
+						})
+					}
+					scope.brandcontentreq()
+					// scope.isLoadMore--;
+					
+					$(window).scroll(function() {
+						console.log($(window).scrollTop())
+						if($(window).scrollTop() >= scope.page * 900) {
+							scope.page++
+								console.log(scope.page)
+							scope.brandcontentreq()
+							scope.isLoadMore--;
+						}
+					})
+
+					scope.clearfix = function(e) {
+						var id = $(e.target).closest('li').attr('id')
+						location.href = '#!/detail/' + id
+						console.log(id)
+						// console.log(this)
+					}
 				}
 			}
 		}])
 		// 加入购物车部分组件
 	directives.directive('xbrandcar', ['$window', 'tool', function($window, tool) {
 			return {
-				templateUrl: "directive/xbrandcar.html",
+				templateUrl: "directive/brand/xbrandcar.html",
 				link: function(scope, ele, attr) {
+					console.log(1111)
 					scope.toButcar = function() {
 						location.href = "#!/buycar"
 					}
@@ -484,7 +502,7 @@
 		// 底部部分组件
 	directives.directive('xbrandfooter', ['$window', '$rootScope', function($window, $rootScope) {
 		return {
-			templateUrl: "directive/xbrandfooter.html",
+			templateUrl: "directive/brand/xbrandfooter.html",
 			link: function(scope, ele, attr) {
 
 			}
@@ -511,7 +529,7 @@
 	// 点击回到顶部组件
 	directives.directive('xbrandgotop', ['$window', '$rootScope', function($window, $rootScope) {
 		return {
-			templateUrl: "directive/xbrandgotop.html",
+			templateUrl: "directive/brand/xbrandgotop.html",
 			link: function(scope, ele, attr) {
 				$(document).scroll(function() {
 					//					console.log(222)
