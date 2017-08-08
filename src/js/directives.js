@@ -234,7 +234,7 @@
 
 	//liang..................................................................list
 
-	// 遮罩层组件
+	// brand遮罩层组件
 	directives.directive('xbrandmasklayer', ['$window', '$rootScope', function($window, $rootScope) {
 			return {
 				templateUrl: "directive/xbrandmasklayer.html",
@@ -243,7 +243,7 @@
 				}
 			}
 		}])
-		// 头部组件
+		// brand头部组件
 	directives.directive('xbrandheader', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
 			return {
 				templateUrl: "directive/xbrandheader.html",
@@ -275,7 +275,7 @@
 				}
 			}
 		}])
-		// 中间部分组件
+		// brand筛选部分组件
 	directives.directive('xbrandcenter', ['$http', '$rootScope', function($http, $rootScope) {
 			return {
 				templateUrl: "directive/xbrandcenter.html",
@@ -285,6 +285,9 @@
 					scope.catName3 = '';
 					//点击切换价格销量
 					$('.sort').parent().on('click', function() {
+						scope.goodslist = [];
+						// 页面渲染前遮罩层出现
+						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 						$(this).addClass('sorted').siblings().removeClass('sorted');
 						$(this).siblings().children().removeClass('asc desc')
 						if($(this).children().hasClass('asc')) {
@@ -309,34 +312,42 @@
 
 						}
 						scope.brandcontentreq()
+						
 					})
 
 					// 点击筛选出现
 					$('i.filter').parent().on('click', function() {
-							$('._1u1iuEeNLuruAqLXg8xrdz').show();
-							$('.sort').removeClass('asc desc');
-							$http({
-								methods: "GET",
-								url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
-								params: {
-									// page:page++
-									brandId: scope.brandId
-								}
-							}).then(function(data) {
-								console.log(data)
-								scope.ddclass = data.data.data
+						// 页面渲染前遮罩层出现
+						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						$('._1u1iuEeNLuruAqLXg8xrdz').show();
+						$('.sort').removeClass('asc desc');
+						$http({
+							methods: "GET",
+							url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
+							params: {
+								// page:page++
+								brandId: scope.brandId
+							}
+						}).then(function(data) {
+							console.log(data)
+							scope.ddclass = data.data.data
 
-							})
+							// 页面渲染后遮罩层隐藏
+							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+
 						})
+					})
 						// 点击筛选里面的字元素
 					$('.filterBody').on('click', 'dd', function() {
 							$(this).addClass('checked').siblings().removeClass('checked');
 							scope.catName3 = $(this).text();
 
 						})
-						// 点击筛选隐藏
+						// 点击筛选里面的确定隐藏
 						// http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=755041472&start=1&catName3=%E9%9D%A2%E8%86%9C
 					$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
+
+						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 						$('._1u1iuEeNLuruAqLXg8xrdz').hide();
 						$http({
 							methods: "GET",
@@ -345,6 +356,8 @@
 						}).then(function(data) {
 							console.log(data)
 							scope.goodslist = data.data.data
+							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+
 
 						})
 					})
@@ -356,18 +369,20 @@
 				}
 			}
 		}])
-		// 内容部分组件
+		// brand内容部分组件
 	directives.directive('xbrandcontent', ['$http', 'tool', function($http, tool) {
 			return {
 				templateUrl: "directive/xbrandcontent.html",
 				link: function(scope, ele, attr) {
-					scope.page = 0;
+					scope.page = 1;
 					scope.goodslist = [];
+					scope.isLoadMore = 0;
 					scope.buy = function(gid) {
 						scope.gid = gid
 						tool.stayTwenty('aaa', scope.gid, "add")
 					}
 					scope.brandcontentreq = function() {
+						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
 						$http({
 							methods: "GET",
 							url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts,
@@ -376,11 +391,80 @@
 							// }
 						}).then(function(data) {
 							console.log(data)
-							scope.goodslist = data.data.data
-
+						
+							scope.goodslist = scope.goodslist.concat(data.data.data)
+							// 页面渲染后遮罩层隐藏
+							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+							scope.isLoadMore++;
 						})
 					}
 					scope.brandcontentreq()
+					// scope.isLoadMore--;
+					
+					$(window).scroll(function() {
+						console.log($(window).scrollTop())
+						if($(window).scrollTop() >= scope.page * 900) {
+							scope.page++
+								console.log(scope.page)
+							scope.brandcontentreq()
+							scope.isLoadMore--;
+						}
+					})
+
+					scope.clearfix = function(e) {
+						var id = $(e.target).closest('li').attr('id')
+						location.href = '#!/detail/' + id
+						console.log(id)
+						// console.log(this)
+					}
+
+					// 点击飞入购物车
+					$('.info').on('click', '.cart', function() {
+
+						//生成图片
+						var $cloneImg = $('<div></div>');
+						var s_left = $(this).offset().left;
+						var s_top = $(this).offset().top;
+						var gid = $(this).parent().parent().parent().attr('id');
+
+						console.log(gid)
+
+						$cloneImg.css({
+							position: 'absolute',
+							left: s_left,
+							top: s_top,
+							width: 40,
+							height: 40,
+							'line-height': 40,
+							'text-align': 'center',
+							'border-radius': '50%',
+							'background-repeat': 'no-repeat',
+							'background-size': 'contain',
+							'background-image': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAMAAAArteDzAAAAyVBMVEUAAAD/gar/hKr/hKz/gar/////hKz/gav/gKr/h63/m7b/gKv/gKv/gar/gav/jK//gKr/gKr/gqv/gqv/gKr/gKv/gav/gav/gqz/gqv/hKz/g63/hKz/i63/gar/gKr/gKv/gKv/gKv/gav/gqv/g6z/g6v/haz/hqz/trb/gqz/gar/gav/hLD/gqv/gKr/8/f/0uH/tc7/gqv/4+3/w9b/scv/ocD/mrv/kLT/ydv/6/L/6vH/3Of/2OT/vNL/qMX/krb/jLJiP+PHAAAAL3RSTlMASzY09gEm+/IZB4PTy2kO5N3Xwbezd29jWD8vHxTprZ2YkX5RRDoqIwPupoodX4kG7iAAAAInSURBVFjD7djZbuJAFATQMmCMbcK+DTthT0I6xIEEkln//6NGFwdpEFiuRj0vMz7PraLdt9QYkEgk/lN2NytWHsxx8yoU9AePRZhxq/6Q83swYahO9KcwoJM7TQ3GMKA3+SJa41omjPVhUnEc7roAoxY3EprJwqjiIbUKs3olSU3BLEtC72GYHEDOhlkF2WoaZs0ltJEipLseSEtH5q84FX8BSkUWK5bjU9utK6XuFK/mkZehozTcs+Pfrwn7519KtBFrKuvWT5T3V1lcR6yurNs8kd7kBoo/VVvu1S0bupctdLhOvbKh3yR0xnVqx4auydAH+apiQ79LaI/s1IvGoEow26kXtv0rjU5tZa0FmOzUV8ks2SDk2U597CS0CcaA7NT7m2Tml2A8yFpiSD9lnTMDpUV1ahMo0QKnHd+pj81O883LVTKp50jbH4fDpId07BSnb4GXpyKDYREaBkRkZpTFEd+pTKRcuXprneyS7hS9EZ1OPcKsoiMvCX/jfdJJg8YfasmFUV5ZUsuW4VEFSlT9iRWjA15TsYY6qQ6bugAvlSdDV9BgTwY5ItOHJtvtpGO4+GfNG6NmxGx7hdF4his0pFWZAi6w+jKj0RK6JuogaONM97MWjauuKlGL/I9I/5ex56jQHc5U1ae5bkePzS/jTO0Yqt3SevSN0Tj7PFY2Ez79hd14lXCGU2hLy5Vyc/HYXHmMkoUr2Fmriwiu1VkikUic+A0oSSO0LAB34wAAAABJRU5ErkJggg==)'
+						}).appendTo('body');
+
+						// 图片飞入动画效果
+						// 动画完成后，把复制li写入购物车列表
+						var e_left = $('._2je43mssPpq3rot5HNhUEl').offset().left;
+						var e_top = $('._2je43mssPpq3rot5HNhUEl').offset().top;
+						setTimeout(function() {
+							$cloneImg.animate({
+								left: e_left,
+								top: e_top,
+								width: 40,
+								height: 40
+							}, function() {
+
+								// 删除动画图片
+								$cloneImg.remove();
+								list1.join(gid);
+								$('.countdown-wrap').find('span').text()
+								// var time = (list1.countDown())(1200);
+								//clearInterval(time)
+							});
+						}, 200)
+						// this.gid = gid;
+					})
 				}
 			}
 		}])
@@ -429,7 +513,25 @@
 		return {
 			templateUrl: "directive/xbrandgotop.html",
 			link: function(scope, ele, attr) {
+				$(document).scroll(function() {
+					//					console.log(222)
+					if($(document).scrollTop() > 200) {
+						//				console.log(23322)
+						$('._3qKxepJBXFjxj1GqSe_v_v').addClass('active');
 
+					} else {
+						$('._3qKxepJBXFjxj1GqSe_v_v').removeClass('active')
+
+					}
+
+				});
+				//按钮top
+				$('._3qKxepJBXFjxj1GqSe_v_v').on('click', function() {
+					console.log('11111')
+					$('body,html').stop(true).animate({
+						scrollTop: 0
+					}, 500)
+				})
 			}
 		}
 	}])
