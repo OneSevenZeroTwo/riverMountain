@@ -5,10 +5,10 @@
 	<ul class="bd">
 		<li class="_2x2q-D1HfUB-t0Mz-xT6p2 clearfix" ng-repeat="n in elesGoods |limitTo:more:0 track by $index ">
 			<div class="lazyload-img-wraper img loaded">
-				<div class="lazyload-img" ng-style="{'background-image':'url({{n.goods.verticalImage}})'}"></div>
+				<div class="lazyload-img" ng-click="toDetail(n.goods.gid)" ng-style="{'background-image':'url({{n.goods.verticalImage}})'}"></div>
 			</div>
 			<div class="info">
-				<h3><b>{{n.goods.brandStoreName}}</b><!-- react-text: 851 -->{{n.goods.productName}}<!-- /react-text --></h3>
+				<h3 ng-click="toDetail(n.goods.gid)"><b>{{n.goods.brandStoreName}}</b><!-- react-text: 851 -->{{n.goods.productName}}<!-- /react-text --></h3>
 				<div class="price">{{n.goods.vipshopPrice}}</div>
 				<div class="gap">
 					<a class="rebuyProduct" ng-click="addBuyCar(n.goods.gid)">重新抢购</a><i class="img-icon cart-delete" ng-click="del($event)"></i></div>

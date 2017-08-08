@@ -832,7 +832,9 @@
 
 				//				遍历cookie中的商品gid,ajax请求，渲染出商品
 				scope.goodlist = []
-
+				scope.toDetail=function(gid){
+					location.href = "#!/detail/"+gid
+				}
 				function getGood(gid, qty) {
 					$http({
 						url: "http://w.lefeng.com/api/neptune/goods/detail_with_stock/v1?needBrandInfo=true",
