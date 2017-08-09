@@ -86,7 +86,7 @@
 
 						$http({
 							methods: 'get',
-							url: 'http://w.lefeng.com/api/neptune/special_brands/v3?page=' + scope.page + '&labelType=1'
+							url: 'https://w.lefeng.com/api/neptune/special_brands/v3?page=' + scope.page + '&labelType=1'
 						}).then(function(data) {
 							console.log(data.data)
 							scope.aaa = data.data.data
@@ -179,7 +179,7 @@
 					//	侧边栏热门搜索
 					$http({
 						methods: 'get',
-						url: 'http://w.lefeng.com/api/neptune/search/hot_keywords/v1?count=10'
+						url: 'https://w.lefeng.com/api/neptune/search/hot_keywords/v1?count=10'
 					}).then(function(data) {
 						console.log(data.data.data)
 						scope.news = data.data.data
@@ -191,7 +191,7 @@
 						console.log(scope.ccc)
 						$http({
 							methods: 'get',
-							url: 'http://w.lefeng.com/api/neptune/search/suggestion/v1?keyword=' + scope.ccc + '&count=15'
+							url: 'https://w.lefeng.com/api/neptune/search/suggestion/v1?keyword=' + scope.ccc + '&count=15'
 						}).then(function(data) {
 							scope.seel = data.data.data
 							console.log(scope.seel)
@@ -261,7 +261,7 @@
 					scope.brandheadreq = function() {
 						$http({
 							methods: "GET",
-							url: "http://w.lefeng.com/api/neptune/brand/details/v1?brandId="+scope.brandId,
+							url: "https://w.lefeng.com/api/neptune/brand/details/v1?brandId="+scope.brandId,
 							params: {
 								// page:page++
 								// brandId: scope.brandId
@@ -326,8 +326,8 @@
 					})
 
 					// 点击筛选出现
-					scope.searchshowapi = "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1?keyword="+$rootScope.keyword
-					scope.brandshowapi = "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1"
+					scope.searchshowapi = "https://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1?keyword="+$rootScope.keyword
+					scope.brandshowapi = "https://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1"
 					scope.commonshowapi = scope.brandshowapi
 					// console.log(attr.channel)
 					if(attr.channel =="list"){
@@ -370,8 +370,8 @@
 					$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
 						console.log(scope.brandId)
 						scope.goodslist = [];
-						scope.brandsureapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort=" + scope.sorts + "&start=1&catName3=" + scope.catName3
-						scope.searchsureapi = "http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword="+$rootScope.keyword+"&catName3="+scope.catName3+"&page=1"
+						scope.brandsureapi = "https://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort=" + scope.sorts + "&start=1&catName3=" + scope.catName3
+						scope.searchsureapi = "https://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword="+$rootScope.keyword+"&catName3="+scope.catName3+"&page=1"
 						scope.commonsureapi = scope.brandsureapi
 						console.log(scope.catName3)
 						if(attr.channel =="list"){
@@ -401,8 +401,8 @@
 
 					})
 					// 点击筛选隐藏
-					scope.brandhideapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
-					scope.Sraechhideapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + $rootScope.keyword + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
+					scope.brandhideapi = "https://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
+					scope.Sraechhideapi = "https://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + $rootScope.keyword + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
 					scope.commonhideapi = scope.brandhideapi
 					$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
 						$('._1u1iuEeNLuruAqLXg8xrdz').hide();
@@ -484,8 +484,8 @@
 					}
 					console.log(attr.channel)	
 					console.log($rootScope.keyword)
-					scope.urlList = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts
-					scope.urlSraech = 'http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword=' + $rootScope.keyword+ scope.sorts
+					scope.urlList = "https://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts
+					scope.urlSraech = 'https://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword=' + $rootScope.keyword+ scope.sorts
 					scope.api = scope.urlList
 
 					if(attr.channel =="list"){
@@ -636,7 +636,7 @@
 					$http({
 						type: "get",
 						dataType: "json",
-						url: "http://w.lefeng.com/api/neptune/goods/detail_with_stock/v1",
+						url: "https://w.lefeng.com/api/neptune/goods/detail_with_stock/v1",
 						params: {
 							needBrandInfo: true,
 							gid: scope.gidnum
@@ -798,7 +798,7 @@
 						scope.isLoadMore++;
 						$http({
 							type: "get",
-							url: "http://w.lefeng.com/api/neptune/handpick_list/v1",
+							url: "https://w.lefeng.com/api/neptune/handpick_list/v1",
 							params: {
 								stochastic: 1,
 								start: scope.startnum,
@@ -913,7 +913,7 @@ directives.directive('xbuycontent', ['$window', '$http', 'tool', function($windo
 
 			function getGood(gid, qty) {
 				$http({
-					url: "http://w.lefeng.com/api/neptune/goods/detail_with_stock/v1?needBrandInfo=true",
+					url: "https://w.lefeng.com/api/neptune/goods/detail_with_stock/v1?needBrandInfo=true",
 					params: {
 						gid: gid
 					}
@@ -1045,7 +1045,7 @@ directives.directive('xelsebuy', ['tool', '$location', '$http', function(tool, $
 			scope.more = 5
 			scope.elseArr = [1119452, 1078211, 852055, 1097323, 1065082, 1043796, 620615]
 			$http({
-				url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1",
+				url: "https://w.lefeng.com/api/neptune/goods/list_with_stock/v1",
 				params: {
 					brandId: scope.elseArr[randomNum(0, scope.elseArr.length - 1)]
 				}
@@ -1116,7 +1116,7 @@ return {
 		scope.getCity = function() {
 			console.log("Getcity")
 			$http({
-				url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
+				url: "https://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
 				params: {
 					areaId: scope.provinceId
 				}
@@ -1131,7 +1131,7 @@ return {
 		//选择城市后触发，请求区镇
 		scope.getTown = function() {
 			$http({
-				url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
+				url: "https://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
 				params: {
 					areaId: scope.cityId
 				}
@@ -1144,7 +1144,7 @@ return {
 		//选择城市后触发，请求区镇
 		scope.getStreet = function() {
 			$http({
-				url: "http://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
+				url: "https://w-ssl.lefeng.com/api/neptune/address/getAddressFullInfoByCode/v1",
 				params: {
 					areaId: scope.townId
 				}
