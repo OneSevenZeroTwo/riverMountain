@@ -226,6 +226,18 @@
 			}
 
 		}])
+		
+		//	loading
+
+		directives.directive('xindexzhe', [function() {
+			return {
+				templateUrl: 'directive/chuanyeIndex/xzhe.html',
+				link: function(scope, ele, attr) {
+					scope.zhe = true
+				}
+			}
+		}])
+
 
 		//liang..................................................................list
 
