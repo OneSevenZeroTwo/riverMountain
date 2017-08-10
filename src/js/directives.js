@@ -94,7 +94,6 @@
 							console.log(scope.arr)
 
 							scope.isLoadMore++;
-
 						})
 					}
 					scope.shows()
@@ -219,7 +218,7 @@
 					$('.shou').on('click', function() {
 						console.log($('.keyword').val())
 						$rootScope.keyword = $('.keyword').val()
-						location.href = "#!/brand2"
+						location.href = "#!/search/"+$rootScope.keyword
 					})
 
 				}
@@ -296,9 +295,10 @@
 					scope.catName3 = '';
 					//点击切换价格销量
 					$('.sort').parent().on('click', function() {
+						scope.page = 1;
 						scope.goodslist = [];
 						// 页面渲染前遮罩层出现
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						scope.isLoading = true;
 						$(this).addClass('sorted').siblings().removeClass('sorted');
 						$(this).siblings().children().removeClass('asc desc')
 						if($(this).children().hasClass('asc')) {
@@ -306,10 +306,12 @@
 							$(this).children().removeClass('asc')
 							console.log($(this).text() == "价格")
 							if($(this).hasClass('vipshopPrice')) {
-								console.log(666)
+								
 								scope.sorts = '{"vipshopPrice":"desc"}'
+								console.log(scope.sorts)
 							} else {
 								scope.sorts = '{"sale":"desc"}'
+								console.log(scope.sorts)
 							}
 
 						} else {
@@ -317,8 +319,10 @@
 							$(this).children().addClass('asc').removeClass('desc')
 							if($(this).hasClass('vipshopPrice')) {
 								scope.sorts = '{"vipshopPrice":"asc"}'
+								console.log(scope.sorts)
 							} else {
 								scope.sorts = '{"sale":"asc"}'
+								console.log(scope.sorts)
 							}
 						}
 						scope.brandcontentreq()
@@ -326,23 +330,19 @@
 					})
 
 					// 点击筛选出现
-					scope.searchshowapi = "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1?keyword="+$rootScope.keyword
-					scope.brandshowapi = "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1"
-					scope.commonshowapi = scope.brandshowapi
-					// console.log(attr.channel)
-					if(attr.channel =="list"){
-						// scope.commonshowapi = scope.brandshowapi
-					}else if(attr.channel =="search"){
-						// scope.commonshowapi = scope.searchshowapi
-					}
+					
 					$('i.filter').parent().on('click', function() {
+
 						// 页面渲染前遮罩层出现
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						scope.isLoading = true;
 						$('._1u1iuEeNLuruAqLXg8xrdz').show();
+						$('._1u1iuEeNLuruAqLXg8xrdz').addClass('show')
 						$('.sort').removeClass('asc desc');
+						$('body').css({overflow: 'hidden'})
+
 						$http({
 							methods: "GET",
-							url: scope.searchshowapi,
+							url: "http://w.lefeng.com/api/neptune/goods/get_thirdcat_size/v1",
 							params: {
 								// page:page++
 								brandId: scope.brandId
@@ -352,7 +352,7 @@
 							scope.ddclass = data.data.data
 
 							// 页面渲染后遮罩层隐藏
-							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+							scope.isLoading = false;
 
 						})
 					})
@@ -368,28 +368,20 @@
 					console.log(scope.brandId)
 					
 					$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
-						console.log(scope.brandId)
+						scope.page = 1;
 						scope.goodslist = [];
-						scope.brandsureapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort=" + scope.sorts + "&start=1&catName3=" + scope.catName3
-						scope.searchsureapi = "http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword="+$rootScope.keyword+"&catName3="+scope.catName3+"&page=1"
-						scope.commonsureapi = scope.brandsureapi
-						console.log(scope.catName3)
-						if(attr.channel =="list"){
-							scope.commonsureapi = scope.brandsureapi
-						}else if(attr.channel =="search"){
-							scope.commonsureapi = scope.searchsureapi
-						}
-						
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						$('body').css({overflow: 'auto'})
+						scope.isLoading = true;
 						$('._1u1iuEeNLuruAqLXg8xrdz').hide();
+						$('._1u1iuEeNLuruAqLXg8xrdz').removeClass('show')
 						$http({
 							methods: "GET",
-							url: scope.commonsureapi,
+							url: "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort=" + scope.sorts + "&start="+scope.page+"&catName3=" + scope.catName3,
 							params: {}
 						}).then(function(data) {
 							console.log(data)
 							scope.goodslist = data.data.data
-							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+							scope.isLoading = false;
 
 						})
 					})
@@ -400,26 +392,12 @@
 						console.log(scope.catName3)
 
 					})
-					// 点击筛选隐藏
-					scope.brandhideapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
-					scope.Sraechhideapi = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + $rootScope.keyword + "&sort='" + scope.sorts + "'&start=1&catName3=" + scope.catName3
-					scope.commonhideapi = scope.brandhideapi
-					$('._1u1iuEeNLuruAqLXg8xrdz').on('click', '.submit', function() {
-						$('._1u1iuEeNLuruAqLXg8xrdz').hide();
-						$http({
-							methods: "GET",
-							url: scope.commonhideapi,
-							params: {}
-						}).then(function(data) {
-							console.log(data)
-							scope.goodslist = data.data.data
 
-						})
-					})
-
-					//点击筛选隐藏
+					//点击筛选取消隐藏
 					$('.header').on('click', '.cancel', function() {
 						$('._1u1iuEeNLuruAqLXg8xrdz').hide();
+						$('._1u1iuEeNLuruAqLXg8xrdz').removeClass('show')
+						$('body').css({overflow: 'auto'})
 					})
 				}
 			}
@@ -482,28 +460,13 @@
 							});
 						}, 200)
 					}
-					console.log(attr.channel)	
-					console.log($rootScope.keyword)
-					scope.urlList = "http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start=1&sort=" + scope.sorts
-					scope.urlSraech = 'http://w.lefeng.com/api/neptune/search/search_by_keyword/v1?keyword=' + $rootScope.keyword+ scope.sorts
-					scope.api = scope.urlList
-
-					if(attr.channel =="list"){
-						scope.api = scope.urlList
-						scope.commonshowapi = scope.brandshowapi;
-						scope.commonhideapi = scope.brandhideapi;
-						scope.commonsureapi = scope.brandsureapi
-					}else if(attr.channel =="search"){
-						scope.api = scope.urlSraech
-						scope.commonshowapi = scope.searchshowapi
-						scope.commonhideapi = scope.brandshowapi
-						scope.commonsureapi = scope.searchsureapi
-					}
+					
 					scope.brandcontentreq = function() {
-						$('._2qMs9THP2bUpWIAG1OhCmP').addClass('active')
+						console.log(scope.page)
+						scope.isLoading = true;
 						$http({
 							methods: "GET",
-							url:scope.api,
+							url:"http://w.lefeng.com/api/neptune/goods/list_with_stock/v1?brandId=" + scope.brandId + "&start="+scope.page+"&sort=" + scope.sorts,
 							// params:{
 							// 	page:page++
 							// }
@@ -512,7 +475,7 @@
 						
 							scope.goodslist = scope.goodslist.concat(data.data.data)
 							// 页面渲染后遮罩层隐藏
-							$('._2qMs9THP2bUpWIAG1OhCmP').removeClass('active')
+							scope.isLoading = false;
 							scope.isLoadMore++;
 						})
 					}

@@ -14,9 +14,9 @@
 		}).state('brand',{
 			url: "/brand/:brandId",
 			templateUrl:'./template/brand.html'
-		}).state('brand2',{
-			url: "/brand2",
-			templateUrl:'./template/brand2.html'
+		}).state('search',{
+			url: "/search/:keyword",
+			templateUrl:'./template/search.html'
 		}).state('hitao',{
 			url: "/hitao/:brandId",
 			templateUrl:'./template/hitao.html'

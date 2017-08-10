@@ -1,4 +1,4 @@
 ;(function(){
-	var app = angular.module('ngApp',['ui.router','controllers','services','filters','directives','routes'])
+	var app = angular.module('ngApp',['ui.router','controllers','services','filters','directives','directivesearch','routes'])
 })();
 
