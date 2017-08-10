@@ -598,7 +598,7 @@
 		}
 	}])
 
-	//tang.................................................................detail
+	//tang.................................................................detail页面
 	//头部
 
 	directives.directive('xdheader', ['$location', '$http', '$state', function($location, $http, $state) {
