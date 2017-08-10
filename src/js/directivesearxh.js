@@ -181,7 +181,7 @@
 					})
 				}
 				scope.searchheadreq()
-				
+				//底部刷新
 				$(window).scroll(function(){                
 			        var scrollh = $(document).height();  
 			        var scrollTop=Math.max(document.documentElement.scrollTop||document.body.scrollTop);  

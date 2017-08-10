@@ -33,6 +33,9 @@
 				templateUrl: "directive/chuanyeIndex/xheader.html",
 				link: function(scope, ele, attr) {
 					console.log("header")
+					scope.list1 = function(){
+						location.href = "#!/brand/755041472"
+					}
 				}
 			}
 		}])
@@ -264,8 +267,7 @@
 							methods: "GET",
 							url: "https://w.lefeng.com/api/neptune/brand/details/v1?brandId="+scope.brandId,
 							params: {
-								// page:page++
-								// brandId: scope.brandId
+								
 							}
 						}).then(function(data) {
 							console.log(data)
@@ -446,11 +448,7 @@
 
 								// 删除动画图片
 								$cloneImg.remove();
-								// list1.join(gid);
 								$('.countdown-wrap').find('span').text()
-								// scope.countDown()
-								// var time = (list1.countDown())(1200);
-								//clearInterval(time)
 							});
 						}, 200)
 					}
@@ -474,23 +472,22 @@
 						})
 					}
 					scope.brandcontentreq()
-					// scope.isLoadMore--;
 					
-					$(window).scroll(function() {
-						console.log($(window).scrollTop())
-						if($(window).scrollTop() >= scope.page * 900) {
-							scope.page++
-								console.log(scope.page)
-							scope.brandcontentreq()
-							scope.isLoadMore--;
-						}
-					})
+					$(window).scroll(function(){                
+				        var scrollh = $(document).height();  
+				        var scrollTop=Math.max(document.documentElement.scrollTop||document.body.scrollTop);  
+				        if((scrollTop + $(window).height()) >= scrollh){ 
+				        	console.log('到底了')
+				        	scope.page++ 
+				        	scope.brandcontentreq();   
+				        } 
+				    });
 
 					scope.clearfix = function(e) {
 						var id = $(e.target).closest('li').attr('id')
 						location.href = '#!/detail/' + id
 						console.log(id)
-						// console.log(this)
+						
 					}
 
 				}
