@@ -188,7 +188,9 @@
 			        if((scrollTop + $(window).height()) >= scrollh){ 
 			        	console.log('到底了')
 			        	scope.page++ 
-			        	scope.searchheadreq();   
+			        	scope.searchheadreq();
+			        	scope.searchnogoodspage++
+			        	scope.searchgoods()   
 			        }
 			        if($(window).scrollTop() >= 300){
 							
@@ -236,11 +238,27 @@
 		}
 	}])
 	// 找不到搜索的商品组件
-	directivesearch.directive('xsearchnogoods', ['$window', '$rootScope', function($window, $rootScope) {
+	directivesearch.directive('xsearchnogoods', ['$http', '$rootScope', function($http, $rootScope) {
 		return {
 			templateUrl: "directive/search/xsearchnogoods.html",
 			link: function(scope, ele, attr) {
+				scope.searchnogoodspage = 1;
+				scope.searchnogoods = [];
+				scope.searchgoods = function(){
+					$http({
+						methods: "GET",
+						url: "http://w.lefeng.com/api/neptune/handpick_list/v1?stochastic=1&start="+scope.searchnogoodspage,
+						params: {}
+					}).then(function(data) {
+						console.log(data)
+						scope.searchnogoods = scope.searchnogoods.concat(data.data.data)
+						console.log(scope.searchnogoods)
+						// scope.isLoading = false;
 
+					})
+				}
+				scope.searchgoods()
+				
 			}
 		}
 	}])
