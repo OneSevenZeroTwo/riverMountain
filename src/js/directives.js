@@ -453,7 +453,8 @@
 								
 							});
 						}, 200)
-						scope.searchallsum++
+
+						scope.brandallsum++
 					}
 
 					scope.brandcontentreq = function() {
@@ -503,17 +504,17 @@
 				templateUrl: "directive/brand/xbrandcar.html",
 				link: function(scope, ele, attr) {
 					
-					scope.searchallsum = 0;
-					scope.searchcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+					scope.brandallsum = 0;
+					scope.brandcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
 					
-					scope.searchtotal = function() {
+					scope.brandtotal = function() {
 						
-						scope.searchcookie.forEach(function(items, i) {
+						scope.brandcookie.forEach(function(items, i) {
 							
-							scope.searchallsum += items.qty
+							scope.brandallsum += items.qty
 						})
 					}
-					scope.searchtotal()
+					scope.brandtotal()
 					
 					scope.toButcar = function() {
 						location.href = "#!/buycar"
@@ -749,6 +750,13 @@
 				scope.bycar = function() {
 					tool.stayTwenty('aaa', scope.gidnum, "add")
 					// location.href = "#!/buycar"
+					
+
+					$('.weui-skin_android').show().find('.weui-actionsheet__cell').text('加入购物车成功');
+					setTimeout(function() {
+						$('.weui-skin_android').hide();
+
+					}, 1000)
 					scope.detailallsum++
 				};
 				
