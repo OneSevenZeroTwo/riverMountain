@@ -411,6 +411,7 @@
 					scope.isLoadMore = 0;
 					scope.buy = function($event,gid) {
 						scope.gid = gid
+						
 						tool.stayTwenty('aaa', scope.gid, "add")
 						//生成图片
 						var $cloneImg = $('<div></div>');
@@ -449,8 +450,10 @@
 								// 删除动画图片
 								$cloneImg.remove();
 								$('.countdown-wrap').find('span').text()
+								
 							});
 						}, 200)
+						scope.searchallsum++
 					}
 
 					scope.brandcontentreq = function() {
@@ -499,11 +502,23 @@
 			return {
 				templateUrl: "directive/brand/xbrandcar.html",
 				link: function(scope, ele, attr) {
-					console.log(1111)
+					
+					scope.searchallsum = 0;
+					scope.searchcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+					
+					scope.searchtotal = function() {
+						
+						scope.searchcookie.forEach(function(items, i) {
+							
+							scope.searchallsum += items.qty
+						})
+					}
+					scope.searchtotal()
+					
 					scope.toButcar = function() {
 						location.href = "#!/buycar"
+						
 					}
-
 				}
 			}
 	}])
@@ -733,10 +748,22 @@
 				//函数逻辑
 				scope.bycar = function() {
 					tool.stayTwenty('aaa', scope.gidnum, "add")
-					location.href = "#!/buycar"
+					// location.href = "#!/buycar"
+					scope.detailallsum++
 				};
+				
+				scope.detailallsum = 0;
+				scope.detailcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+				
+				scope.detailtotal = function() {
+					
+					scope.detailcookie.forEach(function(items, i) {
+						
+						scope.detailallsum += items.qty
+					})
+				}
+				scope.detailtotal()
 			}
-
 		}
 	}])
 	//历史记录商品列表
