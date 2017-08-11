@@ -17,7 +17,7 @@
                 <div class="price-wrap"><span class="price">{{item.goods.vipshopPrice}}</span>
                     <br>
                     <span class="market-price">{{item.goods.marketPrice}}</span>
-                    <i class="cart" ng-click="buy(item.goods.gid)"></i>
+                    <i class="cart" ng-click="buy($event,item.goods.gid)"></i>
                 </div>
             </div>
         </li>

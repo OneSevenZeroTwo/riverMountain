@@ -1,0 +1,45 @@
+<div ng-show="goods">
+    <div class="search-empty">
+      <i class="img-icon search-info-yellow"></i>
+      <span class="txt">
+     <!-- react-text: 127 -->没有找到
+     <!-- /react-text -->
+     <!-- react-text: 128 -->{{keyword}}
+     <!-- /react-text -->
+     <!-- react-text: 129 -->相关商品，换个关键词试试吧~
+     <!-- /react-text --></span>
+    </div>
+   <div class="chosen-product-section">
+    <h3>推荐商品</h3>
+    <div>
+     <ul class="clearfix">
+      <li ng-repeat="sg in searchnogoods" class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
+       <!-- react-empty: 150 -->
+       <div class="lazyload-img-wraper img loaded">
+        <div class="lazyload-img" style="background-image: url(&quot;{{sg.goods.image}}&quot;);"></div>
+       </div>
+       <div class="info">
+        <div class="tag-wrap"></div>
+        <div class="name-wrap">
+         <h2>{{sg.goods.brandStoreName}}</h2>
+         <h3>{{sg.goods.productName}}</h3>
+        </div>
+        <div class="buyer-item">
+         <i class="buyer-num-icon"></i>
+         <span class="buyer-num">
+          <!-- react-text: 162 -->{{sg.goodsStock.saled}}
+          <!-- /react-text -->
+          <!-- react-text: 163 -->人购买
+          <!-- /react-text --></span>
+        </div>
+        <div class="price-wrap">
+         <span class="price">{{sg.goods.vipshopPrice}}</span>
+         <br />
+         <span class="market-price">{{sg.goods.marketPrice}}</span>
+         <i class="cart"></i>
+        </div>
+       </div></li>
+     </ul>
+    </div>
+   </div>
+  </div>

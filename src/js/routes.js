@@ -14,6 +14,12 @@
 		}).state('brand',{
 			url: "/brand/:brandId",
 			templateUrl:'./template/brand.html'
+		}).state('search',{
+			url: "/search/:keyword",
+			templateUrl:'./template/search.html'
+		}).state('hitao',{
+			url: "/hitao/:brandId",
+			templateUrl:'./template/hitao.html'
 		}).state('detail',{
 			url: "/detail/:id",
 			templateUrl:'./template/detail.html'
