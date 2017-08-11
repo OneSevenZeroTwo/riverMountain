@@ -181,14 +181,16 @@
 					})
 				}
 				scope.searchheadreq()
-				
+				//底部刷新
 				$(window).scroll(function(){                
 			        var scrollh = $(document).height();  
 			        var scrollTop=Math.max(document.documentElement.scrollTop||document.body.scrollTop);  
 			        if((scrollTop + $(window).height()) >= scrollh){ 
 			        	console.log('到底了')
 			        	scope.page++ 
-			        	scope.searchheadreq();   
+			        	scope.searchheadreq();
+			        	scope.searchnogoodspage++
+			        	scope.searchgoods()   
 			        }
 			        if($(window).scrollTop() >= 300){
 							
@@ -236,11 +238,94 @@
 		}
 	}])
 	// 找不到搜索的商品组件
-	directivesearch.directive('xsearchnogoods', ['$window', '$rootScope', function($window, $rootScope) {
+	directivesearch.directive('xsearchnogoods', ['$http', '$rootScope', function($http, $rootScope) {
 		return {
 			templateUrl: "directive/search/xsearchnogoods.html",
 			link: function(scope, ele, attr) {
+				scope.searchnogoodspage = 1;
+				scope.searchnogoods = [];
+				scope.searchgoods = function(){
+					$http({
+						methods: "GET",
+						url: "http://w.lefeng.com/api/neptune/handpick_list/v1?stochastic=1&start="+scope.searchnogoodspage,
+						params: {}
+					}).then(function(data) {
+						console.log(data)
+						scope.searchnogoods = scope.searchnogoods.concat(data.data.data)
+						console.log(scope.searchnogoods)
+						// scope.isLoading = false;
 
+					})
+				}
+				scope.searchgoods()
+				
+			}
+		}
+	}])
+	// 购物车组件
+	directivesearch.directive('xsearchcar', ['$rootScope','tool', function( $rootScope,tool) {
+		return {
+			templateUrl: "directive/search/xsearchcar.html",
+			link: function(scope, ele, attr) {
+				scope.searchallsum = 0;
+				scope.searchcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+				console.log(scope.searchcookie)
+				scope.searchtotal = function() {
+					
+					scope.searchcookie.forEach(function(items, i) {
+						
+						scope.searchallsum += items.qty
+					})
+				}
+				scope.searchtotal()
+
+				scope.searchbuy = function($event,gid) {
+					scope.gid = gid
+					
+					tool.stayTwenty('aaa', scope.gid, "add")
+					//生成图片
+					var $cloneImg = $('<div></div>');
+					var s_left = $($event.target).offset().left;
+					var s_top = $($event.target).offset().top;
+					var gid = $($event.target).parent().parent().parent().attr('id');
+
+					console.log(gid)
+
+					$cloneImg.css({
+						position: 'absolute',
+						left: s_left,
+						top: s_top,
+						width: 40,
+						height: 40,
+						'line-height': 40,
+						'text-align': 'center',
+						'border-radius': '50%',
+						'background-repeat': 'no-repeat',
+						'background-size': 'contain',
+						'background-image': 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAMAAAArteDzAAAAyVBMVEUAAAD/gar/hKr/hKz/gar/////hKz/gav/gKr/h63/m7b/gKv/gKv/gar/gav/jK//gKr/gKr/gqv/gqv/gKr/gKv/gav/gav/gqz/gqv/hKz/g63/hKz/i63/gar/gKr/gKv/gKv/gKv/gav/gqv/g6z/g6v/haz/hqz/trb/gqz/gar/gav/hLD/gqv/gKr/8/f/0uH/tc7/gqv/4+3/w9b/scv/ocD/mrv/kLT/ydv/6/L/6vH/3Of/2OT/vNL/qMX/krb/jLJiP+PHAAAAL3RSTlMASzY09gEm+/IZB4PTy2kO5N3Xwbezd29jWD8vHxTprZ2YkX5RRDoqIwPupoodX4kG7iAAAAInSURBVFjD7djZbuJAFATQMmCMbcK+DTthT0I6xIEEkln//6NGFwdpEFiuRj0vMz7PraLdt9QYkEgk/lN2NytWHsxx8yoU9AePRZhxq/6Q83swYahO9KcwoJM7TQ3GMKA3+SJa41omjPVhUnEc7roAoxY3EprJwqjiIbUKs3olSU3BLEtC72GYHEDOhlkF2WoaZs0ltJEipLseSEtH5q84FX8BSkUWK5bjU9utK6XuFK/mkZehozTcs+Pfrwn7519KtBFrKuvWT5T3V1lcR6yurNs8kd7kBoo/VVvu1S0bupctdLhOvbKh3yR0xnVqx4auydAH+apiQ79LaI/s1IvGoEow26kXtv0rjU5tZa0FmOzUV8ks2SDk2U597CS0CcaA7NT7m2Tml2A8yFpiSD9lnTMDpUV1ahMo0QKnHd+pj81O883LVTKp50jbH4fDpId07BSnb4GXpyKDYREaBkRkZpTFEd+pTKRcuXprneyS7hS9EZ1OPcKsoiMvCX/jfdJJg8YfasmFUV5ZUsuW4VEFSlT9iRWjA15TsYY6qQ6bugAvlSdDV9BgTwY5ItOHJtvtpGO4+GfNG6NmxGx7hdF4his0pFWZAi6w+jKj0RK6JuogaONM97MWjauuKlGL/I9I/5ex56jQHc5U1ae5bkePzS/jTO0Yqt3SevSN0Tj7PFY2Ez79hd14lXCGU2hLy5Vyc/HYXHmMkoUr2Fmriwiu1VkikUic+A0oSSO0LAB34wAAAABJRU5ErkJggg==)'
+					}).appendTo('body');
+
+					// 图片飞入动画效果
+					// 动画完成后，把复制li写入购物车列表
+					var e_left = $('._2je43mssPpq3rot5HNhUEl').offset().left;
+					var e_top = $('._2je43mssPpq3rot5HNhUEl').offset().top;
+					setTimeout(function() {
+						$cloneImg.animate({
+							left: e_left,
+							top: e_top,
+							width: 40,
+							height: 40
+						}, function() {
+
+							// 删除动画图片
+							$cloneImg.remove();
+							$('.countdown-wrap').find('span').text()
+							
+						});
+					}, 200)
+
+					scope.searchallsum++
+				}
 			}
 		}
 	}])

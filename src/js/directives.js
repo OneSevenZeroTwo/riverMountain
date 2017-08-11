@@ -33,6 +33,9 @@
 				templateUrl: "directive/chuanyeIndex/xheader.html",
 				link: function(scope, ele, attr) {
 					console.log("header")
+					scope.list1 = function(){
+						location.href = "#!/brand/755041472"
+					}
 				}
 			}
 		}])
@@ -264,8 +267,7 @@
 							methods: "GET",
 							url: "https://w.lefeng.com/api/neptune/brand/details/v1?brandId="+scope.brandId,
 							params: {
-								// page:page++
-								// brandId: scope.brandId
+								
 							}
 						}).then(function(data) {
 							console.log(data)
@@ -409,6 +411,7 @@
 					scope.isLoadMore = 0;
 					scope.buy = function($event,gid) {
 						scope.gid = gid
+						
 						tool.stayTwenty('aaa', scope.gid, "add")
 						//生成图片
 						var $cloneImg = $('<div></div>');
@@ -446,13 +449,12 @@
 
 								// 删除动画图片
 								$cloneImg.remove();
-								// list1.join(gid);
 								$('.countdown-wrap').find('span').text()
-								// scope.countDown()
-								// var time = (list1.countDown())(1200);
-								//clearInterval(time)
+								
 							});
 						}, 200)
+
+						scope.brandallsum++
 					}
 
 					scope.brandcontentreq = function() {
@@ -474,23 +476,22 @@
 						})
 					}
 					scope.brandcontentreq()
-					// scope.isLoadMore--;
 					
-					$(window).scroll(function() {
-						console.log($(window).scrollTop())
-						if($(window).scrollTop() >= scope.page * 900) {
-							scope.page++
-								console.log(scope.page)
-							scope.brandcontentreq()
-							scope.isLoadMore--;
-						}
-					})
+					$(window).scroll(function(){                
+				        var scrollh = $(document).height();  
+				        var scrollTop=Math.max(document.documentElement.scrollTop||document.body.scrollTop);  
+				        if((scrollTop + $(window).height()) >= scrollh){ 
+				        	console.log('到底了')
+				        	scope.page++ 
+				        	scope.brandcontentreq();   
+				        } 
+				    });
 
 					scope.clearfix = function(e) {
 						var id = $(e.target).closest('li').attr('id')
 						location.href = '#!/detail/' + id
 						console.log(id)
-						// console.log(this)
+						
 					}
 
 				}
@@ -502,11 +503,23 @@
 			return {
 				templateUrl: "directive/brand/xbrandcar.html",
 				link: function(scope, ele, attr) {
-					console.log(1111)
+					
+					scope.brandallsum = 0;
+					scope.brandcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+					
+					scope.brandtotal = function() {
+						
+						scope.brandcookie.forEach(function(items, i) {
+							
+							scope.brandallsum += items.qty
+						})
+					}
+					scope.brandtotal()
+					
 					scope.toButcar = function() {
 						location.href = "#!/buycar"
+						
 					}
-
 				}
 			}
 	}])
@@ -736,10 +749,29 @@
 				//函数逻辑
 				scope.bycar = function() {
 					tool.stayTwenty('aaa', scope.gidnum, "add")
-					location.href = "#!/buycar"
-				};
-			}
+					// location.href = "#!/buycar"
+					
 
+					$('.weui-skin_android').show().find('.weui-actionsheet__cell').text('加入购物车成功');
+					setTimeout(function() {
+						$('.weui-skin_android').hide();
+
+					}, 1000)
+					scope.detailallsum++
+				};
+				
+				scope.detailallsum = 0;
+				scope.detailcookie = getCookie("aaa") ? JSON.parse(getCookie("aaa")) : []
+				
+				scope.detailtotal = function() {
+					
+					scope.detailcookie.forEach(function(items, i) {
+						
+						scope.detailallsum += items.qty
+					})
+				}
+				scope.detailtotal()
+			}
 		}
 	}])
 	//历史记录商品列表

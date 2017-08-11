@@ -13,270 +13,29 @@
     <h3>推荐商品</h3>
     <div>
      <ul class="clearfix">
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
+      <li ng-repeat="sg in searchnogoods" class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
        <!-- react-empty: 150 -->
        <div class="lazyload-img-wraper img loaded">
-        <div class="lazyload-img" style="background-image: url(&quot;http://a2.vimage1.com/upload/merchandise/pdc/568/213/1104302572863213568/7/6933098427296-5.jpg&quot;);"></div>
+        <div class="lazyload-img" style="background-image: url(&quot;{{sg.goods.image}}&quot;);"></div>
        </div>
        <div class="info">
         <div class="tag-wrap"></div>
         <div class="name-wrap">
-         <h2>诗婷露雅</h2>
-         <h3>鳄梨 紧致修护眼部套装 30g+30g</h3>
+         <h2>{{sg.goods.brandStoreName}}</h2>
+         <h3>{{sg.goods.productName}}</h3>
         </div>
         <div class="buyer-item">
          <i class="buyer-num-icon"></i>
          <span class="buyer-num">
-          <!-- react-text: 162 -->39397
+          <!-- react-text: 162 -->{{sg.goodsStock.saled}}
           <!-- /react-text -->
           <!-- react-text: 163 -->人购买
           <!-- /react-text --></span>
         </div>
         <div class="price-wrap">
-         <span class="price">79</span>
+         <span class="price">{{sg.goods.vipshopPrice}}</span>
          <br />
-         <span class="market-price">248</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 170 -->
-       <div class="lazyload-img-wraper img loaded">
-        <div class="lazyload-img" style="background-image: url(&quot;http://a2.vimage1.com/upload/merchandise/pdc/218/161/6281753417953161218/0/TM201504101030-5.jpg&quot;);"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>御泥坊</h2>
-         <h3>补水控油修护蚕丝面膜套装21片</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 182 -->652
-          <!-- /react-text -->
-          <!-- react-text: 183 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">129</span>
-         <br />
-         <span class="market-price">307</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 190 -->
-       <div class="lazyload-img-wraper img loaded">
-        <div class="lazyload-img" style="background-image: url(&quot;http://a2.vimage1.com/upload/merchandise/pdcvis/2017/06/29/31/6f593963a4d64bdfb1b82dc1cbfd252a-5.jpg&quot;);"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>自然堂</h2>
-         <h3>雪域精粹纯粹滋润精华液40ml</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 202 -->7059
-          <!-- /react-text -->
-          <!-- react-text: 203 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">174</span>
-         <br />
-         <span class="market-price">198</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 210 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>珍珂儿</h2>
-         <h3>日本蛋清米酵素衡净洁颜晶露100g（升级版）</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 222 -->346
-          <!-- /react-text -->
-          <!-- react-text: 223 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">68</span>
-         <br />
-         <span class="market-price">88</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 230 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>花酿</h2>
-         <h3>绝色遮瑕液2.5g</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 242 -->2713
-          <!-- /react-text -->
-          <!-- react-text: 243 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">29</span>
-         <br />
-         <span class="market-price">79</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 250 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>傲蝶</h2>
-         <h3>Ottie傲蝶幻影自动眼线笔 黑色1#</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 262 -->3
-          <!-- /react-text -->
-          <!-- react-text: 263 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">47</span>
-         <br />
-         <span class="market-price">79</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 270 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>所望</h2>
-         <h3>韩国SOMANG牛奶美白滋润身体护理组合</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 282 -->5521
-          <!-- /react-text -->
-          <!-- react-text: 283 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">119</span>
-         <br />
-         <span class="market-price">210</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 290 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>汇美舍</h2>
-         <h3>茶树油/10ml</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 302 -->994
-          <!-- /react-text -->
-          <!-- react-text: 303 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">66</span>
-         <br />
-         <span class="market-price">120</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 310 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>欧莱雅</h2>
-         <h3>清润葡萄籽水嫩洁面乳125ml</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 322 -->121
-          <!-- /react-text -->
-          <!-- react-text: 323 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">85</span>
-         <br />
-         <span class="market-price">100</span>
-         <i class="cart"></i>
-        </div>
-       </div></li>
-      <li class="Ekwoj4AzxaaLKz3hCWWQv clearfix">
-       <!-- react-empty: 330 -->
-       <div class="lazyload-img-wraper img">
-        <div class="lazyload-img"></div>
-        <div class="img-loading"></div>
-       </div>
-       <div class="info">
-        <div class="tag-wrap"></div>
-        <div class="name-wrap">
-         <h2>丸美</h2>
-         <h3>唯爱礼盒</h3>
-        </div>
-        <div class="buyer-item">
-         <i class="buyer-num-icon"></i>
-         <span class="buyer-num">
-          <!-- react-text: 342 -->1776
-          <!-- /react-text -->
-          <!-- react-text: 343 -->人购买
-          <!-- /react-text --></span>
-        </div>
-        <div class="price-wrap">
-         <span class="price">408</span>
-         <br />
-         <span class="market-price">1231</span>
+         <span class="market-price">{{sg.goods.marketPrice}}</span>
          <i class="cart"></i>
         </div>
        </div></li>
