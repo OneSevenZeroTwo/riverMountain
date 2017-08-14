@@ -355,7 +355,7 @@
 							scope.ddclass = data.data.data
 
 							// 页面渲染后遮罩层隐藏
-							scope.isLoading = false;
+							// scope.isLoading = false;
 
 						})
 					})
