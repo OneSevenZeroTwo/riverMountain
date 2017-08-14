@@ -329,7 +329,7 @@
 								console.log(scope.sorts)
 							}
 						}
-						scope.brandcontentreq()
+						// scope.brandcontentreq()
 
 					})
 
